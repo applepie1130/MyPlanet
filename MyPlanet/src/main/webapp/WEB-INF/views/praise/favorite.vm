@@ -1,0 +1,273 @@
+<!-- #*	[S] Praise Header *# -->
+#parse( "/praise/header.vm" )
+<!-- #*	[E] Praise Header *# -->
+
+<body>
+	<!-- #*	[S] Praise Snb *# -->
+	#parse( "/praise/snb.vm" )
+	<!-- #*	[E] Praise Snb *# -->
+	
+	<!-- #*	[S] Container *# -->
+	<div class="container-fluid">
+		<div class="row row-offcanvas row-offcanvas-left">
+			
+			<!-- #*	[S] Praise Sidebar *# -->
+			#parse( "/praise/sidebar.vm" )
+			<!-- #*	[E] Praise Sidebar *# -->
+			
+			<div class="col-sm-9 col-md-10 main">
+			
+			#if ( $!{pageType} == "list" )
+				<ol class="breadcrumb" style="background-color: transparent; margin-bottom: 5px;">
+					<li>
+						<i class="fa fa-lg fa-refresh" style="margin-right: 5px;"></i> 
+						<a href="/praise/favorite?pageType=img" style="color:#999;">이미지형</a>
+					</li>
+					<li class="active" style="color:#555;"><strong>리스트형</strong></li>
+				</ol>
+				
+				<div id="pageListType">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="list-group">
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="1" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="2" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="3" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="4" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="5" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="6" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="7" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>
+						            <a href="/praise/view/" class="list-group-item" data-click="numberbutton">
+						                <i class="fa fa-lg fa-star" data-value="8" style="margin-right: 10px;"></i> Title
+										<span class="pull-right text-muted small"><em>234 장</em></span>
+						            </a>					            
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			#else
+				<ol class="breadcrumb" style="background-color: transparent; margin-bottom: 5px;">
+					<li class="active" style="color:#555;">
+						<i class="fa fa-lg fa-refresh" style="margin-right: 5px;"></i>
+						<strong>이미지형</strong>
+					</li>
+					<li>
+						<a href="/praise/favorite?pageType=list" style="color:#999;">리스트형</a>
+					</li>
+				</ol>
+				
+				<div id="pageImgType">
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title" >
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="1" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="2" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="3" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="4" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="5" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<span data-click="numberbutton">
+										<i class="fa fa-lg fa-star" data-value="6" style="margin-right: 10px;"></i>
+									</span>
+									<strong>Title</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div class="thumbnail">
+									<a href="/praise/view/">
+										<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" style="height: 300px; width: 100%; display: block;">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			#end
+			</div>
+		</div>
+	</div>		
+	<!-- #*	[E] Container *# -->
+	
+	<footer>
+		<div class="pull-right">
+			<div class="glyphicon glyphicon-copyright-mark"></div> 
+			2015 Copyright Sung-Jun
+		</div>
+	</footer>
+	<script type="text/javascript">
+		"use strict";
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				
+				/* #* [S] Pre Excute Function *# */
+				fnChangeStarColor();
+				/* #* [E] Pre Excute Function *# */
+				
+				/* #* [S] Init Function *# */
+				var fnChangeStarColor = function () {
+					var sFavoriteVal	= "$!{favoriteVal}";
+					var rSplited		= sFavoriteVal.split(",");
+					var nLength			= rSplited.length-1;
+					var _target			= "";
+					
+					for ( var i=0; i<nLength; i++ ) {
+						_target		= jQuery("[data-value=" + rSplited[i] + "]");
+						_target.addClass("fa-star");
+						_target.removeClass("fa-star-o");
+					}
+				}
+				
+				var fnLoadingPages = function () {
+				}
+				/* #* [E] Init Function *# */
+				
+				jQuery("[data-click=numberbutton]").bind("click", function(e) {
+					e.preventDefault();
+					
+					if ( e.target.nodeName === "I" ) {
+						if ( confirm("즐겨찾기 해제하시겠습니까?") ) {
+							var _target		= jQuery(e.target);
+							var sClassNm	= _target.attr("class");
+							var sSettingVal	= _target.attr("data-value");
+							
+							Controller.setAction("/praise/saveFavorite");
+							Controller.setParams({
+								"cookieValue"	: sSettingVal,
+							});
+							Controller.submit(function(data){
+								if ( sClassNm.indexOf("fa-star-o") > -1 ) {
+									_target.addClass("fa-star");
+									_target.removeClass("fa-star-o");
+								} else {
+									_target.addClass("fa-star-o");
+									_target.removeClass("fa-star");
+								}
+							});
+						}
+					} else {
+						location.href="/praise/view/";
+					}
+				});
+			});
+			/* #* [E] Document Ready *# */
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Praise Footer *# -->
+#parse( "/praise/footer.vm" )
+<!-- #*	[E] Praise Footer *# -->

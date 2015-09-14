@@ -1,0 +1,35 @@
+<!-- #*	[S] Common Header *# -->
+#parse( "/common/header.vm" )
+<!-- #*	[E] Common Header *# -->
+
+<body>
+	<!-- #*	[S] Common Snb *# -->
+	#parse( "/common/snb.vm" )
+	<!-- #*	[E] Common Snb *# -->
+	
+	<!-- #*	[S] Container *# -->
+	하이 ^^
+	<!-- #*	[E] Container *# -->
+	
+	<script type="text/javascript">
+		"use strict";
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				/* #* [S] Init Function *# */
+				/* #* [E] Init Function *# */
+				
+				/* #* [S] Pre Excute Function *# */
+				/* #* [E] Pre Excute Function *# */
+				
+				/* #* [S] Event Binding *# */
+				/* #* [E] Event Binding *# */
+			});
+			/* #* [E] Document Ready *# */
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Common Footer *# -->
+#parse( "/common/footer.vm" )
+<!-- #*	[E] Common Footer *# -->

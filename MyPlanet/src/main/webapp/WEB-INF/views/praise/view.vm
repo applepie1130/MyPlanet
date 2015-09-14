@@ -1,0 +1,46 @@
+<!-- #*	[S] Praise Header *# -->
+#parse( "/praise/header.vm" )
+<!-- #*	[E] Praise Header *# -->
+
+<body class="view-image">
+	<div class="btn-close-view-image">
+		<i class="fa fa-lg fa-1x fa-star-o" data-click="myfavorite" data-value="1" style="float: left; padding: 10px;"></i>
+		<i class="fa fa-lg fa-1x fa-times" style="float: right; padding: 10px; color: #E7E7E7" onclick="history.back(); return false;"></i>
+	</div>
+	<img src="http://cfile234.uf.daum.net/original/2531744555A4A39B200D89" alt="뷰 이미지">
+	
+	<script type="text/javascript">
+		"use strict";
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				jQuery("[data-click=myfavorite]").bind("click", function(e) {
+					e.preventDefault();
+					
+					var _target		= jQuery(e.target);
+					var sClassNm	= _target.attr("class");
+					var sSettingVal	= _target.attr("data-value");
+					
+					Controller.setAction("/praise/saveFavorite");
+					Controller.setParams({
+						"cookieValue"	: sSettingVal,
+					});
+					Controller.submit(function(data){
+						if ( sClassNm.indexOf("fa-star-o") > -1 ) {
+							_target.addClass("fa-star");
+							_target.removeClass("fa-star-o");
+						} else {
+							_target.addClass("fa-star-o");
+							_target.removeClass("fa-star");
+						}
+					});
+				});
+			});
+			/* #* [E] Document Ready *# */
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Praise Footer *# -->
+#parse( "/praise/footer.vm" )
+<!-- #*	[E] Praise Footer *# -->

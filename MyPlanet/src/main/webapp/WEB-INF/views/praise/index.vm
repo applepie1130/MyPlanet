@@ -1,0 +1,157 @@
+<!-- #*	[S] Praise Header *# -->
+#parse( "/praise/header.vm" )
+<!-- #*	[E] Praise Header *# -->
+
+<body>
+	<!-- #*	[S] Praise Snb *# -->
+	#parse( "/praise/snb.vm" )
+	<!-- #*	[E] Praise Snb *# -->
+	
+	<!-- #*	[S] Container *# -->
+	<div class="container-fluid">
+		<div class="row row-offcanvas row-offcanvas-left">
+			
+			<!-- #*	[S] Praise Sidebar *# -->
+			#parse( "/praise/sidebar.vm" )
+			<!-- #*	[E] Praise Sidebar *# -->
+			
+			<div class="col-sm-9 col-md-10 main">
+			#if ( $!{pageType} == "title" ) 
+				<ol class="breadcrumb" style="background-color: transparent; margin-bottom: 5px;">
+					<li>
+						<i class="fa fa-lg fa-refresh" style="margin-right: 5px;"></i>
+						<a href="?pageType=number" style="color:#999;">장 순</a></li>
+					<li class="active" style="color:#555;"><strong>제목 순</strong></li>
+				</ol>
+			
+				<div class="col-sm-6">
+				#foreach ( $eachList in $!{mRtnData} )
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>$!{eachList.get(0).first_nm}</strong></h3>
+						</div>
+						<div class="panel-body">
+							<div class="list-group">
+							#foreach ( $eachData in $!{eachList} )
+								<a href="#" class="list-group-item" data-click="numberbutton">
+									$!{eachData.title}
+									<span class="pull-right text-muted small"><em>$!{eachData.sheet_num} 장</em></span>
+								</a>
+							#end
+							</div>
+						</div>
+					</div>
+				#end
+				</div>
+				
+			#else
+			
+				<ol class="breadcrumb" style="background-color: transparent; margin-bottom: 5px;">
+					<li class="active" style="color:#555;">
+						<i class="fa fa-lg fa-refresh" style="margin-right: 5px;"></i>
+						<strong>장 순</strong>
+					</li>
+					<li>
+						<a href="?pageType=title" style="color:#999;">제목 순</a>
+					</li>
+				</ol>
+			
+				<div class="col-sm-6">
+					#set ( $nTotalCnt = $math.toInteger($nTotalCnt) )
+					#set ( $nTotalCnt = 619 )
+					#if ( $nTotalCnt > 0 ) 
+						#set ( $nPannelCnt = $nTotalCnt / 50 + 1)
+						#set ( $nBtnEndCnt = ($nTotalCnt / 50.0 - $nPannelCnt + 1) * 50 )
+						#set ( $nBtnEndCnt = $math.round($nBtnEndCnt) )
+						
+						#if ( $nTotalCnt % 50 == 0 ) 
+							#set ( $nPannelCnt = $nPannelCnt - 1)
+						#end
+	
+						#foreach( $i in [1..$nPannelCnt] )
+							#set ( $nStartTitle = $i * 50 - 49 )
+							
+							#if ( $i == $nPannelCnt )
+								#set ( $nEndTitle = $nStartTitle + $nBtnEndCnt - 1 )
+							#else
+								#set ( $nEndTitle = $i * 50 )
+							#end
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title"><strong>$nStartTitle - $nEndTitle 장</strong></h3>
+								</div>
+								<div class="panel-body">
+									<div class="bs-glyphicons">
+										<ul class="bs-glyphicons-list">
+										#foreach ( $j in [$nStartTitle..$nEndTitle] )
+											<li data-click="numberbutton">$j 장</li>
+										#end
+										</ul>
+									</div>
+								</div>
+							</div>
+						#end
+					#end	
+				</div>
+			#end
+			</div>
+		</div>
+	</div>		
+	<!-- #*	[E] Container *# -->
+	
+	<footer>
+		<div class="pull-right">
+			<div class="glyphicon glyphicon-copyright-mark"></div> 
+			2015 Copyright Sung-Jun.
+		</div>
+	</footer>
+	<script type="text/javascript">
+		"use strict";
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				/* #* [S] Init Function *# */
+				var fnChangeStarColor = function () {
+					var sFavoriteVal	= "$!{favoriteVal}";
+					var rSplited		= sFavoriteVal.split(",");
+					var nLength			= rSplited.length-1;
+					var _target			= "";
+					
+					for ( var i=0; i<nLength; i++ ) {
+						_target		= jQuery("[data-value=" + rSplited[i] + "]");
+						_target.addClass("fa-star");
+						_target.removeClass("fa-star-o");
+					}
+				}
+				
+				var fnLoadingPages = function () {
+					console.log("loadingng");
+				}
+				/* #* [E] Init Function *# */
+				
+				/* #* [S] Pre Excute Function *# */
+				fnChangeStarColor();
+				/* #* [E] Pre Excute Function *# */
+				
+				/* #* [S] Event Binding *# */
+				jQuery("[data-click=numberbutton]").bind("click", function(e) {
+					e.preventDefault();
+					location.href="/praise/view/";
+				});
+				
+				jQuery(window).scroll(function(){
+					if (jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height()) {
+						fnLoadingPages();
+					}
+				});
+				/* #* [E] Event Binding *# */
+			});
+			/* #* [E] Document Ready *# */
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Praise Footer *# -->
+#parse( "/praise/footer.vm" )
+<!-- #*	[E] Praise Footer *# -->

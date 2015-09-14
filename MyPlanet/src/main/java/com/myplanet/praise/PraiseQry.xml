@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="praiseQry" >
+	<select id ="selectMusicSheetListBySearch" parameterType="java.util.Map" resultType= "java.util.Map">
+		select a.sheet_num									as sheet_num,
+			   a.first_nm								    as first_nm,
+			   a.title										as title,
+			   a.lyrics										as lyrics,
+			   a.composer									as composer,
+			   a.lyricist									as lyricist,
+			   a.img_path									as img_path,
+			   a.img_file_nm								as img_file_nm,
+			   a.use_yn										as use_yn,
+			   a.bigo										as bigo,
+			   date_format(a.insert_dt, '%Y%m%d%H%i%s')		as insert_dt,
+			   date_format(a.update_dt, '%Y%m%d%H%i%s')		as update_dt,
+			   a.login_ip									as login_ip
+		  from praiseapp.music_sheet a
+		 where 1 = 1
+		<if test="search_bar != null">
+		   and a.title like concat('%', #{search_bar}, '%')
+		</if>
+		
+		   and a.use_yn = 'Y'
+		
+		 order by a.title, a.sheet_num
+    </select>
+
+
+    <select id ="selectMusicSheetListByFirstNm" parameterType="java.util.Map" resultType= "java.util.Map">
+		select a.sheet_num									as sheet_num,
+			   a.first_nm								    as first_nm,
+			   a.title										as title,
+			   a.lyrics										as lyrics,
+			   a.composer									as composer,
+			   a.lyricist									as lyricist,
+			   a.img_path									as img_path,
+			   a.img_file_nm								as img_file_nm,
+			   a.use_yn										as use_yn,
+			   a.bigo										as bigo,
+			   date_format(a.insert_dt, '%Y%m%d%H%i%s')		as insert_dt,
+			   date_format(a.update_dt, '%Y%m%d%H%i%s')		as update_dt,
+			   a.login_ip									as login_ip
+		  from praiseapp.music_sheet a
+		 where 1 = 1
+		<if test="search_bar != null">
+		   and a.title like concat('%', #{search_bar}, '%')
+		</if>
+		
+		   and a.use_yn = 'Y'
+		
+		 order by a.first_nm, a.title, a.sheet_num
+    </select>
+    
+    
+    <select id ="selectMusicSheetTotalCount" parameterType="java.util.Map" resultType= "java.util.Map">
+		select count(*)						as tot_cnt
+		  from praiseapp.music_sheet a
+		 where 1 = 1
+		   and a.use_yn = 'Y'
+    </select>
+</mapper>

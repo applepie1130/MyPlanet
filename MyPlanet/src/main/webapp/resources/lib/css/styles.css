@@ -1,0 +1,217 @@
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+body {
+  padding-top: 50px;
+  background-color: #444;
+}
+footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #fff;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -36%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 33%;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    margin-left: 15px;
+  }
+}
+
+
+/* Sidebar navigation */
+.nav-sidebar {
+  background-color: #444;
+  margin-right: -15px;
+  margin-bottom: 20px;
+  margin-left: -15px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #fff;
+}
+
+.nav-sidebar > li > a:hover, .nav-sidebar > li > a:default {
+  color: #444;
+}
+
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #141823;
+}
+
+/*
+ * Main content
+ */
+.main {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background-color: #e9eaed;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+/* [S] SungJun's */
+.navbar-toggle {
+	margin-right: 0px;
+	margin-top: 0px;
+	padding: 6px; 10px;
+}
+
+.navbar-inverse {
+	background-color: #2A8400;
+	border-color: transparent;
+}
+ 
+.navbar-inverse .navbar-toggle {
+	background-color: #2A8400;
+	border-color: transparent;
+}
+ 
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+	background-color: #2A8400;
+}
+ 
+ .nav>li>a:hover, .nav>li>a:focus {
+	background-color: #ccc;
+}
+
+.view-image { background:#000; padding-top: 0px;}
+.view-image img { clear:both; width:100%; }
+
+.fa-star { color : #FFB738; } .fa-star:hover { color : #FFB738; }
+.fa-star-o { color : #FFB738; } .fa-star-o:hover { color : #FFB738; }
+.title { color : #688a7e; }
+
+.bs-glyphicons {
+	margin: 0 -10px 20px;
+    overflow: hidden;	
+}
+.bs-glyphicons-list {
+	padding-left: 0;
+    list-style: none;
+}
+.bs-glyphicons li {
+	float: left;
+    width: 20%;
+    height: 40px;
+    padding-top: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #fff;
+}
+@media (min-width: 768px)
+.bs-glyphicons li {
+    width: 12.5%;
+    font-size: 12px;
+}
+#scroll-top.in {
+	opacity: .5;
+	transition: opacity .3s;
+}
+#scroll-top.out {
+	opacity: .5;
+	transition: opacity .3s;
+}
+#scroll-top {
+    background-color: #404449;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 55px;
+    font-size: 20px;
+    right: 5px;
+    border-radius: 2px;
+    opacity: 0;
+    z-index: 999;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+}
+/* [E] SungJun's */
+
+/* typeahead.js */
+.typeahead {
+  background-color: #fff;
+}
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.tt-hint {
+  color: #999
+}
+.tt-menu {
+  width: 100%;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+.gist {
+  font-size: 14px;
+}
+/* typeahead.js */

@@ -1,0 +1,93 @@
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container-fluid">		
+				<div style="margin-top:8px;">
+					<div class="input-group" id="snb">
+						<input type="text" class="form-control typeahead" placeholder="제목이나 장을 입력해보세요." />
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" style="border-radius:0px; border-bottom-right-radius: 4px; border-top-right-radius: 4px;">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+							<button type="button" class="btn btn-default navbar-toggle" data-toggle="offcanvas" style="float: none; position: relative; margin-bottom:0px; margin-left:10px; border-bottom-left-radius: 4px; border-top-left-radius: 4px; background-color: transparent; border-color: transparent;" >
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+		
+		<script type="text/javascript">
+			/* #* Velocity 주석 in Javascript *# */
+			(function(jQuery) {
+				/* #* [S] Document Ready *# */
+				jQuery(function() {
+					/* #* [S] Init Function *# */
+					var fnScrollMove = function() { 
+						jQuery('html,body').animate({scrollTop:0}, 100);
+					}
+					
+					var substringMatcher = function( strs ) {
+						return function findMatches(q, cb) {
+							var matches, substringRegex;
+							
+							// an array that will be populated with substring matches
+							matches = [];
+							
+							// regex used to determine if a string contains the substring `q`
+							substrRegex = new RegExp(q, 'i');
+			
+						    // iterate through the pool of strings and for any string that
+						    // contains the substring `q`, add it to the `matches` array
+							jQuery.each(strs, function(i, str) {
+								if (substrRegex.test(str)) {
+									matches.push(str);
+								}
+							});
+						    
+							cb(matches);
+						};
+					};
+					/* #* [E] Init Function *# */
+					
+					jQuery("[data-toggle=offcanvas]").bind("click", function() {
+						var _target = jQuery(".row-offcanvas");
+						_target.toggleClass("active");
+						
+						if (_target.attr("class").indexOf("active") !== -1 ) {
+							fnScrollMove();	
+						}
+					});
+				
+					jQuery(window).scroll(function(){
+						if (jQuery(window).scrollTop() >= 100 ) {
+							jQuery("#scroll-top").addClass("in");
+						} else {
+							jQuery("#scroll-top").removeClass("in");
+						}
+					});
+					
+					jQuery("#scroll-top").bind("click", function(){
+						fnScrollMove();
+					});
+					
+					var rKeyWord = "$!{sKeyWordData}";
+				
+					jQuery('#snb .form-control').typeahead({
+						hint: false,
+						highlight: false,
+						minLength: 1
+					},
+					{
+						name: 'rKeyWord',
+						source: substringMatcher(rKeyWord.split(","))
+					});
+				});
+			/* #* [E] Document Ready *# */
+			}(jQuery));
+		</script>
