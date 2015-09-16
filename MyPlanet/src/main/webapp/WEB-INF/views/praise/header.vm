@@ -12,19 +12,19 @@
 	
 	<title>Worship and Praise</title>
 	
-	<link rel="stylesheet" href="/resources/lib/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/resources/lib/css/styles.css">
-	<link rel="stylesheet" href="/resources/lib/css/font.css">
-	<link rel="stylesheet" href="/resources/lib/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/resources/lib/css/praise/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/lib/css/praise/styles.css">
+	<link rel="stylesheet" href="/resources/lib/css/praise/font.css">
+	<link rel="stylesheet" href="/resources/lib/css/praise/font-awesome.min.css">
 	
-	<script type="text/javascript" src="/resources/lib/js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="/resources/lib/js/spin.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/typeahead.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/common.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="/resources/lib/js/praise/spin.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/typeahead.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/common.min.js"></script>
 	
-	<script type="text/javascript" src="/resources/lib/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/praise/dataTables.bootstrap.min.js"></script>
 </head>
 #parse( "/common/spinner.vm" )

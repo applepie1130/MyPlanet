@@ -20,7 +20,7 @@
 				<ol class="breadcrumb" style="background-color: transparent; margin-bottom: 5px;">
 					<li>
 						<i class="fa fa-lg fa-refresh" style="margin-right: 5px;"></i>
-						<a href="?pageType=number" style="color:#999;">장 순</a></li>
+						<a href="/praise?pageType=number" style="color:#999;">장 순</a></li>
 					<li class="active" style="color:#555;"><strong>제목 순</strong></li>
 				</ol>
 			
@@ -52,7 +52,7 @@
 						<strong>장 순</strong>
 					</li>
 					<li>
-						<a href="?pageType=title" style="color:#999;">제목 순</a>
+						<a href="/praise?pageType=title" style="color:#999;">제목 순</a>
 					</li>
 				</ol>
 			
