@@ -11,20 +11,99 @@
 		
 		<!-- #*	[S] Container *# -->
 		<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Dashboard <small>Statistics and more</small></h1>
-                    <div class="alert alert-dismissable alert-warning">
-                        <button data-dismiss="alert" class="close" type="button">&times;</button>
-                        Welcome to the admin dashboard! Feel free to review all pages and modify the layout to your needs. 
-                        <br />
-                        This theme uses the <a href="https://www.shieldui.com">ShieldUI</a> JavaScript library for the 
-                        additional data visualization and presentation functionality illustrated here.
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Dashboard</h1>
+					<div class="alert alert-dismissable alert-warning">
+						<button data-dismiss="alert" class="close" type="button">&times;</button>
+						<b>오늘의 말씀 ($!{mRtnDailyQTData.searchTime.substring(0,10)})</b>
+						<br />
+						$!{mRtnDailyQTData.contents}
                     </div>
                 </div>
             </div>
             <div class="row">
+            	<div class="col-md-4">
+                    <header>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#naverRank">NAVER</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#daumRank">Daum</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="body tab-content">
+                        <div class="tab-pane clearfix active" id="naverRank">
+                            <h5 class="tab-header"><i class="fa fa-comments fa-2x"></i> 실시간 급상승 검색어</h5>
+                           	#foreach( $eachData in $!{rNaverRankList} )
+							<h5 class="tab-header">
+								<a href="$!{eachData.link}" target="_blank">$!{eachData.title}</a>
+								<span class="badge" style="float:right;">$!{eachData.rank}</span>
+							</h5>
+                			#end
+                        </div>
+                        <div class="tab-pane" id="daumRank">
+                            <h5 class="tab-header"><i class="fa fa-comments fa-2x"></i> 실시간 급상승 검색어</h5>
+                           	#foreach( $eachData in $!{rDaumRankList} )
+							<h5 class="tab-header">
+								<a href="$!{eachData.link}" target="_blank">$!{eachData.title}</a>
+								<span class="badge" style="float:right;">$!{eachData.rank}</span>
+							</h5>
+                			#end
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="col-md-8">
+                    <header>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#sisaNews">시사 뉴스</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#entNews">연예 뉴스</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#spoNews">스포츠 뉴스</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="body tab-content">
+                        <div class="tab-pane clearfix active" id="sisaNews">
+                            <h5 class="tab-header"><i class="fa fa-comments fa-2x"></i> 네이트 실시간 랭킹뉴스</h5>
+                           	#foreach( $eachData in $!{rSisaRankList} )
+							<h5 class="tab-header">
+								<a href="$!{eachData.link}" target="_blank">$!{eachData.title}</a>
+								<span class="badge" style="float:right;">$!{eachData.rank}</span>
+							</h5>
+                			#end
+                        </div>
+                        <div class="tab-pane" id="entNews">
+                            <h5 class="tab-header"><i class="fa fa-comments fa-2x"></i> 네이트 실시간 랭킹뉴스</h5>
+                           	#foreach( $eachData in $!{rEntRankList} )
+							<h5 class="tab-header">
+								<a href="$!{eachData.link}" target="_blank">$!{eachData.title}</a>
+								<span class="badge" style="float:right;">$!{eachData.rank}</span>
+							</h5>
+                			#end
+                        </div>
+                        <div class="tab-pane" id="spoNews">
+                            <h5 class="tab-header"><i class="fa fa-comments fa-2x"></i> 네이트 실시간 랭킹뉴스</h5>
+                           	#foreach( $eachData in $!{rSpoRankList} )
+							<h5 class="tab-header">
+								<a href="$!{eachData.link}" target="_blank">$!{eachData.title}</a>
+								<span class="badge" style="float:right;">$!{eachData.rank}</span>
+							</h5>
+                			#end
+                        </div>
+                    </div>
+                </div>
+            </div></br>
+            
+            <div class="row">
+            	<div class="col-md-8">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Visits Based on a 10 days data</h3>
@@ -34,6 +113,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -483,14 +563,14 @@
 	                ]
 	            });
 	            
-	            var setIntervalRankData = setInterval(function(){
+	            /* var setIntervalRankData = setInterval(function(){
 		            // 실시간급상승 검색어 데이터 조회
-		            Controller.setAction("/findRealRankList");
+		            Controller.setAction("/findRealRankList", "", "", false);
 					Controller.setParams({});
 					Controller.submit(function(data){
 						console.log(data);
 					});
-	            }, 10000);
+	            }, 10000); */
 			});
 			/* #* [E] Document Ready *# */
 		}(jQuery));

@@ -48,6 +48,9 @@ public class MainController extends CommonController {
 	public String findMainPage(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request, HttpServletResponse response) {
 		paramMap = RequestUtil.getParameter(paramMap, request, response);
 		
+		// 랭킹순위제한
+		paramMap.put("ranknum", 10);
+		
 		Map mRtnData	= new HashMap<String, Object>();
 		
 		// 네이버
@@ -57,8 +60,33 @@ public class MainController extends CommonController {
 		// 다음
 		paramMap.put("url", "http://www.daum.net/");
 		List rDaumRankList = mainSvc.findDaumRealRankList(paramMap);
+
+		// 갓피플 오늘의 말씀
+		paramMap.put("url", "http://www.godpeople.com/ajax/_home_top100.php");
+//		paramMap.put("url", "http://www.duranno.com/qt/reload_default.asp");
+		Map mRtnDailyQTData = mainSvc.findDailyQTData(paramMap);
 		
-		System.out.println(rDaumRankList);
+		// 네이트 랭킹뉴스(시사)
+		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=m2001&section=sisa&rmode=interest");
+		List rSisaRankList = mainSvc.findNateRealRankList(paramMap);
+		
+		// 네이트 랭킹뉴스(연예)
+		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=e2001&section=ent&rmode=interest");
+		List rEntRankList = mainSvc.findNateRealRankList(paramMap);
+		
+		// 네이트 랭킹뉴스(스포츠)
+		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=s2001&section=spo&rmode=interest");
+		List rSpoRankList = mainSvc.findNateRealRankList(paramMap);
+		
+		System.out.println(rSpoRankList);
+		
+		// set response data
+		model.addAttribute("rNaverRankList", rNaverRankList);
+		model.addAttribute("rDaumRankList", rDaumRankList);
+		model.addAttribute("mRtnDailyQTData", mRtnDailyQTData);
+		model.addAttribute("rSisaRankList", rSisaRankList);
+		model.addAttribute("rEntRankList", rEntRankList);
+		model.addAttribute("rSpoRankList", rSpoRankList);
 		
 		return "/main/index";
 	}
