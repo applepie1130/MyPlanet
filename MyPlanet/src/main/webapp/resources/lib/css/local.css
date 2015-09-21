@@ -1,4 +1,14 @@
-﻿/* Dark Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
+﻿/* SungJun's CSS */
+.text-over {
+	display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Dark Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

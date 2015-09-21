@@ -191,13 +191,11 @@ public class MainService extends CommonService {
 	        		break;
 	        	}
 	        	
-	        	System.out.println(el.children().attr("href"));
-	        	
         		Map mData = new HashMap();
         		
         		mData.put("rank", nRank++);
 	        	mData.put("title", el.after("span").text());
-	        	mData.put("link", el.children().attr("href"));
+	        	mData.put("link", el.children().attr("href").replaceAll("m.news.nate.com", "news.nate.com").replaceAll("\\?.+", ""));
 	        	mData.put("searchTime", now);
 	        	
 	        	rRtnData.add(mData);
