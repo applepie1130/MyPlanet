@@ -78,7 +78,10 @@ public class MainController extends CommonController {
 		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=s2001&section=spo&rmode=interest");
 		List rSpoRankList = mainSvc.findNateRealRankList(paramMap);
 		
-		System.out.println(rSpoRankList);
+		// 네이버 증권정보
+		paramMap.put("url", "http://m.stock.naver.com/");
+		List rFinanceList = mainSvc.findNaverFinanceList(paramMap);
+		
 		
 		// set response data
 		model.addAttribute("rNaverRankList", rNaverRankList);
@@ -87,6 +90,7 @@ public class MainController extends CommonController {
 		model.addAttribute("rSisaRankList", rSisaRankList);
 		model.addAttribute("rEntRankList", rEntRankList);
 		model.addAttribute("rSpoRankList", rSpoRankList);
+		model.addAttribute("rFinanceList", rFinanceList);
 		
 		return "/main/index";
 	}

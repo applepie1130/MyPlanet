@@ -210,4 +210,64 @@ public class MainService extends CommonService {
 		
 		return rRtnData;
 	}
+	
+	/**
+	 * @Desc	: 네이버 금융(증권정보)
+	 * @Author	: 김성준
+	 * @Create	: 2015년 09월 22일 
+	 * @stereotype ServiceMethod
+	 */
+//	@Cacheable(value="default")
+	public List findNaverFinanceList(Map paramMap) {
+		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
+		
+		List rRtnData = new ArrayList();
+		
+		try {
+			// 검색시간
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+	        long nowmills = System.currentTimeMillis();
+	        String now = sdf.format(new Date(nowmills));
+			
+			Document doc = Jsoup.connect(sPageUrl).get();
+			
+			// 검색구분자 CSS Selector
+			String sRealRankSelector = ".index_lst a";
+			Elements rcw = doc.select(sRealRankSelector);
+			
+			int num = 0;
+			
+	        // CSS Parsing
+	        for (Element el : rcw) {
+	        	num++;
+	        	
+        		Map mData = new HashMap();
+        		
+	        	mData.put("section", el.children().select("strong").get(0).text());
+	        	mData.put("link", el.attr("href"));
+	        	mData.put("amount", el.children().select("span").get(0).text());
+	        	mData.put("point", el.children().select(".gap_price").text().replaceAll("[가-힣]+",""));
+	        	mData.put("rate", el.children().select(".gap_rate").text());
+	        	
+	        	if ( num < 2 ) {
+	        		mData.put("gaein", el.children().select("ul li").get(0).select("span").text());
+	        		mData.put("forein", el.children().select("ul li").get(0).select("span").text());
+	        		mData.put("gigan", el.children().select("ul li").get(0).select("span").text());
+	        	}
+	        	
+	        	mData.put("searchTime", now);
+	        	
+	        	rRtnData.add(mData);
+	        	
+	        	mData = null;
+	        }
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(rRtnData);
+		
+		return rRtnData;
+	}
 }
