@@ -82,6 +82,8 @@ public class MainController extends CommonController {
 		paramMap.put("url", "http://m.stock.naver.com/");
 		List rFinanceList = mainSvc.findNaverFinanceList(paramMap);
 		
+		// 네이버 트렌드 랭킹
+		List lsTrendRankList = mainSvc.findNaverTrendRankJSONList();
 		
 		// set response data
 		model.addAttribute("rNaverRankList", rNaverRankList);
@@ -91,6 +93,7 @@ public class MainController extends CommonController {
 		model.addAttribute("rEntRankList", rEntRankList);
 		model.addAttribute("rSpoRankList", rSpoRankList);
 		model.addAttribute("rFinanceList", rFinanceList);
+		model.addAttribute("lsTrendRankList", lsTrendRankList);
 		
 		return "/main/index";
 	}

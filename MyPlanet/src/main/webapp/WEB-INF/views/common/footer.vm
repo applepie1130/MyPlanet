@@ -1,1 +1,9 @@
+	<div id="pbafooter" class="pbfooter" style="top: 1643px;">
+		<div class="container">
+			<div class="col-md-12 text-right">
+				<span class="glyphicon glyphicon-home"></span>
+				<a href="http://58.232.121.39:8080/" title="Copyright © SungJun. All rights reserved." style="color:white;">Copyright © SungJun. All rights reserved.</a>
+			</div>
+		</div>
+	</div>
 </html>

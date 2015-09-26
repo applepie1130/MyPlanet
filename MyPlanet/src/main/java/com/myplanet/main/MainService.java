@@ -4,17 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import com.myplanet.comm.CommonService;
 
@@ -266,8 +268,32 @@ public class MainService extends CommonService {
 			e.printStackTrace();
 		}
 		
-		System.out.println(rRtnData);
-		
 		return rRtnData;
+	}
+	
+	/**
+	 * @Desc	: 네이버 트랜드 랭킹 조회 (RESTful : JSON)
+	 * @Author	: 김성준
+	 * @Create	: 2015년 09월 26일 
+	 * @stereotype ServiceMethod
+	 */
+	public List findNaverTrendRankJSONList() {
+		
+		List lsRtnData = new ArrayList<String>();
+		List lsTrendURL = new ArrayList<String>();
+		
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=search");		// 검색
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=news");		// 뉴스
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=company");	// 증권사
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=talk");		// 토론
+		
+		RestTemplate restTemplate = new RestTemplate();
+		Iterator itr = lsTrendURL.iterator();
+		
+		while ( itr.hasNext() ) {
+			lsRtnData.add(restTemplate.getForObject(ObjectUtils.toString(itr.next()), String.class));
+		}
+		
+		return lsRtnData;
 	}
 }

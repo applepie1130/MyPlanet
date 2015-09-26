@@ -8,6 +8,21 @@
 }
 
 
+
+.pbfooter {
+	width:100%; 
+	height:50px; 
+	background-color:#F58723; 
+	color:white; 
+	top:0; 
+	left:0; 
+	z-index:1200; 
+	padding-top:15px;
+}
+
+
+
+
 /* Dark Admin Bootstrap Theme by PrepBootstrap - http://www.prepbootstrap.com */
 html {
   font-family: sans-serif;
@@ -5954,7 +5969,7 @@ table.tablesorter thead tr th:hover {
   }
 
   #page-wrapper {
-	padding: 15px 25px;
+	padding: 5px 25px;
   }
 
   /* Side Nav */
