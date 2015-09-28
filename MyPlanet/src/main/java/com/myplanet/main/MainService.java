@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.json.JSONObject;
@@ -33,7 +34,8 @@ public class MainService extends CommonService {
 //	@Cacheable(value="default")
 	public List findNaverRealRankList(Map paramMap) {
 		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
-		List rRtnData = new ArrayList();
+		
+		List lsRtnData	= new ArrayList();
 		
 		try {
 			Document doc = Jsoup.connect(sPageUrl).get();
@@ -58,7 +60,7 @@ public class MainService extends CommonService {
 	        	
 	        	String sId = el.parent().attr("id");
 	        	if ( !"lastrank".equals(sId) ) {
-	        		rRtnData.add(mData);
+	        		lsRtnData.add(mData);
 	        	}
 	        	
 	        	mData = null;
@@ -68,7 +70,7 @@ public class MainService extends CommonService {
 			e.printStackTrace();
 		}
 		
-		return rRtnData;
+		return lsRtnData;
 	}
 	
 	/**
@@ -80,7 +82,7 @@ public class MainService extends CommonService {
 //	@Cacheable(value="default")
 	public List findDaumRealRankList(Map paramMap) {
 		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
-		List rRtnData = new ArrayList();
+		List lsRtnData = new ArrayList();
 		
 		try {
 			Document doc = Jsoup.connect(sPageUrl).get();
@@ -106,7 +108,7 @@ public class MainService extends CommonService {
 		        	mData.put("link", el.attr("href"));
 		        	mData.put("searchTime", now);
 		        	
-		        	rRtnData.add(mData);
+		        	lsRtnData.add(mData);
 		        	
 		        	mData = null;
 	        	}
@@ -116,7 +118,7 @@ public class MainService extends CommonService {
 			e.printStackTrace();
 		}
 		
-		return rRtnData;
+		return lsRtnData;
 	}
 	
 	/**
@@ -171,7 +173,7 @@ public class MainService extends CommonService {
 		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
 		int nRankNum = (Integer) paramMap.get("ranknum");
 		
-		List rRtnData = new ArrayList();
+		List lsRtnData = new ArrayList();
 		
 		try {
 			Document doc = Jsoup.connect(sPageUrl).get();
@@ -200,7 +202,7 @@ public class MainService extends CommonService {
 	        	mData.put("link", el.children().attr("href").replaceAll("m.news.nate.com", "news.nate.com").replaceAll("\\?.+", ""));
 	        	mData.put("searchTime", now);
 	        	
-	        	rRtnData.add(mData);
+	        	lsRtnData.add(mData);
 	        	
 	        	mData = null;
 	        	nChk++;
@@ -210,7 +212,7 @@ public class MainService extends CommonService {
 			e.printStackTrace();
 		}
 		
-		return rRtnData;
+		return lsRtnData;
 	}
 	
 	/**
@@ -223,7 +225,7 @@ public class MainService extends CommonService {
 	public List findNaverFinanceList(Map paramMap) {
 		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
 		
-		List rRtnData = new ArrayList();
+		List lsRtnData = new ArrayList();
 		
 		try {
 			// 검색시간
@@ -259,7 +261,7 @@ public class MainService extends CommonService {
 	        	
 	        	mData.put("searchTime", now);
 	        	
-	        	rRtnData.add(mData);
+	        	lsRtnData.add(mData);
 	        	
 	        	mData = null;
 	        }
@@ -268,7 +270,7 @@ public class MainService extends CommonService {
 			e.printStackTrace();
 		}
 		
-		return rRtnData;
+		return lsRtnData;
 	}
 	
 	/**
@@ -286,12 +288,73 @@ public class MainService extends CommonService {
 		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=news");		// 뉴스
 		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=company");	// 증권사
 		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=talk");		// 토론
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=blog");		// 블로그
+		lsTrendURL.add("http://m.stock.naver.com/api/json/trend/getTrendList.nhn?type=cafe");		// 카페
 		
 		RestTemplate restTemplate = new RestTemplate();
 		Iterator itr = lsTrendURL.iterator();
 		
 		while ( itr.hasNext() ) {
 			lsRtnData.add(restTemplate.getForObject(ObjectUtils.toString(itr.next()), String.class));
+		}
+		
+		return lsRtnData;
+	}
+	
+	/**
+	 * @Desc	: 네이버 금융(증권정보 : 상한가 종목)
+	 * @Author	: 김성준
+	 * @Create	: 2015년 09월 27일 
+	 * @stereotype ServiceMethod
+	 */
+//	@Cacheable(value="default")
+	public List findNaverFinanceUpperList(Map paramMap) {
+		String sPageUrl = ObjectUtils.toString(paramMap.get("url"));
+		String sType = ObjectUtils.toString(paramMap.get("type"));
+
+		List lsRtnData = new ArrayList();
+		
+		// KOSPI, KOSDAQ 타입설정
+		Map mTypeData = new HashMap<String, Integer>();
+		mTypeData.put("KOSPI", 0);
+		mTypeData.put("KOSDAQ", 1);
+		
+		try {
+			// 검색시간
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+	        long nowmills = System.currentTimeMillis();
+	        String now = sdf.format(new Date(nowmills));
+			
+			Document doc = Jsoup.connect(sPageUrl).get();
+			
+			// 검색구분자 CSS Selector
+			String sRealRankSelector = ".box_type_l tbody";
+				
+	        // CSS Parsing
+			int num = 0;
+			int nEq = (Integer) mTypeData.get(sType.toUpperCase());
+			Elements rcw = doc.select(sRealRankSelector).eq(nEq).select("tr");
+			
+	        for (Element el : rcw) {
+        		Map mData = new HashMap();
+        		
+        		if ( !(num == 0 || num == 1 || (num == rcw.size() - 1) || (num == rcw.size() - 2)) ) {
+        			mData.put("section", el.select("td").eq(3).select("a").text());			// 종목명
+        			mData.put("amount", el.select("td").eq(4).text());						// 현재가
+        			mData.put("diffpercent", el.select("td").eq(5).select("span").text());	// 전일비
+        			mData.put("percent", el.select("td").eq(6).select("span").text());		// 등락률
+        			mData.put("volume", el.select("td").eq(7).text());						// 거래량
+        			mData.put("searchTime", now);
+        			
+        			lsRtnData.add(mData);
+        		}
+        		
+        		mData = null;
+	        	num++;
+	        }
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return lsRtnData;

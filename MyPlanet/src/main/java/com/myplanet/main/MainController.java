@@ -55,11 +55,11 @@ public class MainController extends CommonController {
 		
 		// 네이버
 		paramMap.put("url", "http://www.naver.com/");
-		List rNaverRankList = mainSvc.findNaverRealRankList(paramMap);
+		List lsNaverRankList = mainSvc.findNaverRealRankList(paramMap);
 		
 		// 다음
 		paramMap.put("url", "http://www.daum.net/");
-		List rDaumRankList = mainSvc.findDaumRealRankList(paramMap);
+		List lsDaumRankList = mainSvc.findDaumRealRankList(paramMap);
 
 		// 갓피플 오늘의 말씀
 		paramMap.put("url", "http://www.godpeople.com/ajax/_home_top100.php");
@@ -68,32 +68,42 @@ public class MainController extends CommonController {
 		
 		// 네이트 랭킹뉴스(시사)
 		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=m2001&section=sisa&rmode=interest");
-		List rSisaRankList = mainSvc.findNateRealRankList(paramMap);
+		List lsSisaRankList = mainSvc.findNateRealRankList(paramMap);
 		
 		// 네이트 랭킹뉴스(연예)
 		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=e2001&section=ent&rmode=interest");
-		List rEntRankList = mainSvc.findNateRealRankList(paramMap);
+		List lsEntRankList = mainSvc.findNateRealRankList(paramMap);
 		
 		// 네이트 랭킹뉴스(스포츠)
 		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=s2001&section=spo&rmode=interest");
-		List rSpoRankList = mainSvc.findNateRealRankList(paramMap);
+		List lsSpoRankList = mainSvc.findNateRealRankList(paramMap);
 		
 		// 네이버 증권정보
 		paramMap.put("url", "http://m.stock.naver.com/");
-		List rFinanceList = mainSvc.findNaverFinanceList(paramMap);
+		List lsFinanceList = mainSvc.findNaverFinanceList(paramMap);
 		
 		// 네이버 트렌드 랭킹
 		List lsTrendRankList = mainSvc.findNaverTrendRankJSONList();
 		
+		// 네이버 증권정보(상한가 종목)
+		paramMap.put("url", "http://finance.naver.com/sise/sise_upper.nhn");
+		paramMap.put("type", "KOSPI");
+		List lsKospiUpperList = mainSvc.findNaverFinanceUpperList(paramMap);
+		
+		paramMap.put("type", "KOSDAQ");
+		List lsKosdaqUpperList = mainSvc.findNaverFinanceUpperList(paramMap);
+		
 		// set response data
-		model.addAttribute("rNaverRankList", rNaverRankList);
-		model.addAttribute("rDaumRankList", rDaumRankList);
+		model.addAttribute("lsNaverRankList", lsNaverRankList);
+		model.addAttribute("lsDaumRankList", lsDaumRankList);
 		model.addAttribute("mRtnDailyQTData", mRtnDailyQTData);
-		model.addAttribute("rSisaRankList", rSisaRankList);
-		model.addAttribute("rEntRankList", rEntRankList);
-		model.addAttribute("rSpoRankList", rSpoRankList);
-		model.addAttribute("rFinanceList", rFinanceList);
+		model.addAttribute("lsSisaRankList", lsSisaRankList);
+		model.addAttribute("lsEntRankList", lsEntRankList);
+		model.addAttribute("lsSpoRankList", lsSpoRankList);
+		model.addAttribute("lsFinanceList", lsFinanceList);
 		model.addAttribute("lsTrendRankList", lsTrendRankList);
+		model.addAttribute("lsKospiUpperList", lsKospiUpperList);
+		model.addAttribute("lsKosdaqUpperList", lsKosdaqUpperList);
 		
 		return "/main/index";
 	}

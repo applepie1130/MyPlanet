@@ -23,7 +23,7 @@
             </div>
             
             <div class="row">
-            	<div class="col-md-8">
+            	<div class="col-md-6">
                 	<h4 class="tab-header">
 						<a href="http://news.nate.com/" target="_blank" style="color: white;"><i class="fa fa-chevron-right"></i> 네이트 실시간 랭킹뉴스</a>
 					</h4>
@@ -42,7 +42,7 @@
                     </header>
                     <div class="body tab-content" style="padding-bottom: 5px;">
                         <div class="tab-pane clearfix active" id="sisaNews">
-                           	#foreach( $eachData in $!{rSisaRankList} )
+                           	#foreach( $eachData in $!{lsSisaRankList} )
 							<h5 class="tab-header">
 								<span class="badge" style="float:left; position: absolute;">$!{eachData.rank}</span>
 								<a href="$!{eachData.link}" target="_blank" class="text-over" style="padding-left: 30px;">$!{eachData.title}</a>
@@ -50,7 +50,7 @@
                 			#end
                         </div>
                         <div class="tab-pane" id="entNews">
-                           	#foreach( $eachData in $!{rEntRankList} )
+                           	#foreach( $eachData in $!{lsEntRankList} )
 							<h5 class="tab-header">
 								<span class="badge" style="float:left; position: absolute;">$!{eachData.rank}</span>
 								<a href="$!{eachData.link}" target="_blank" class="text-over" style="padding-left: 30px;">$!{eachData.title}</a>
@@ -58,7 +58,7 @@
                 			#end
                         </div>
                         <div class="tab-pane" id="spoNews">
-                           	#foreach( $eachData in $!{rSpoRankList} )
+                           	#foreach( $eachData in $!{lsSpoRankList} )
 							<h5 class="tab-header">
 								<span class="badge" style="float:left; position: absolute;">$!{eachData.rank}</span>
 								<a href="$!{eachData.link}" target="_blank" class="text-over" style="padding-left: 30px;">$!{eachData.title}</a>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 
-                <div class="col-md-4">
+                <div class="col-md-6">
 					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 실시간 급상승 검색어</h4>
                    <header>
                        <ul class="nav nav-tabs">
@@ -83,7 +83,7 @@
                    <div class="body tab-content">
                        <div class="tab-pane clearfix active" id="naverRank">
                           	<div id="divTargetNaverRank">
-                          		#foreach( $eachData in $!{rNaverRankList} )
+                          		#foreach( $eachData in $!{lsNaverRankList} )
 								<h5 class="tab-header">
 									<span class="badge" style="float:left; position: absolute;">$!{eachData.rank}</span>
 									<a href="$!{eachData.link}" target="_blank" class="text-over" style="padding-left: 30px;">$!{eachData.title}</a>
@@ -93,7 +93,7 @@
                        </div>
                        <div class="tab-pane" id="daumRank">
                            <div id="divTargetDaumRank">
-                          		#foreach( $eachData in $!{rDaumRankList} )
+                          		#foreach( $eachData in $!{lsDaumRankList} )
 								<h5 class="tab-header">
 									<span class="badge" style="float:left; position: absolute;">$!{eachData.rank}</span>
 									<a href="$!{eachData.link}" target="_blank" class="text-over" style="padding-left: 30px;">$!{eachData.title}</a>
@@ -106,9 +106,9 @@
             </div>
             
             <div class="row">
-            	<div class="col-md-8">
+            	<div class="col-md-6">
 					<h4 class="tab-header">
-						<a href="http://finance.naver.com/" target="_blank" style="color: white;"><i class="fa fa-chevron-right"></i> 증권 트랜드랭킹</a>
+						<a href="http://finance.naver.com/" target="_blank" style="color: white;"><i class="fa fa-chevron-right"></i> 증권 트랜드 랭킹</a>
 					</h4>
 					<header style="padding-bottom:10px;">
                         <ul class="nav nav-tabs">
@@ -123,6 +123,12 @@
                             </li>
                             <li class="">
                                 <a data-toggle="tab" href="#financeDebate">토론</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#financeBloge">블로그</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#financeCafe">카페</a>
                             </li>
                         </ul>
                     </header>
@@ -139,17 +145,42 @@
 						<div class="tab-pane" id="financeDebate">
                            <div id="grid_trendrank_db"></div>
 						</div>
+						<div class="tab-pane" id="financeBlog">
+                           <div id="grid_trendrank_bg"></div>
+						</div>
+						<div class="tab-pane" id="financeCafe">
+                           <div id="grid_trendrank_cf"></div>
+						</div>
 					</div>
 				</div>
                 
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
 					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 이시각 증시</h4>
 					<div id="grid_finance"></div>
 				</div>
-				
-				<div class="col-md-4">
-					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 이시각 증시</h4>
-					<div id="grid_finance2"></div>
+				 -->
+				<div class="col-md-6">
+					<h4 class="tab-header">
+						<a href="http://finance.naver.com/sise/sise_upper.nhn" target="_blank" style="color: white;"><i class="fa fa-chevron-right"></i> 이시각 상한가 종목</a>
+					</h4>
+                    <header style="padding-bottom:10px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#kospi">코스피</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#kosdaq">코스닥</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="body tab-content" style="padding-bottom: 5px;">
+                        <div class="tab-pane clearfix active" id="kospi">
+							<div id="grid_kospi_upper"></div>
+                        </div>
+                        <div class="tab-pane" id="kosdaq">
+							<div id="grid_kosdaq_upper"></div>
+                        </div>
+					</div>
 				</div>
 			</div>
         </div>
@@ -158,29 +189,29 @@
 	
 	<script type="text/javascript">
 		"use strict";
-		var lsTrendRankList;
 		
 		/* #* Velocity 주석 in Javascript *# */
 		(function(jQuery) {
 			/* #* [S] Document Ready *# */
 			jQuery(function() {
 				/* #* [S] Init Function *# */
-				var _bInit = false;
+				/* #* [E] Init Function *# */
+
 				
+				/* #* [S] Pre Excute Function *# */
 				var nHeigthOfNaver = jQuery("#naverRank").height() + 5;
 				jQuery("#naverRank").height(nHeigthOfNaver);
 				jQuery("#daumRank").height(nHeigthOfNaver-10);
 				
-				/* var el = jQuery(".tab-content");
-				el.html(el.html().replace(/Demo Version/ig, "")); */
-				
+				/* #* Remove DEMO VERSION *# */
 				var st = setTimeout(function() {
 					jQuery('a[href="http://www.shieldui.com"]').remove();
 				}, 100);
 				
-				/* #* [E] Init Function *# */
+				/* var el = jQuery(".tab-content");
+				el.html(el.html().replace(/Demo Version/ig, "")); */
+				/* #* Remove DEMO VERSION *# */				
 				
-				/* #* [S] Pre Excute Function *# */
 				/* #* [E] Pre Excute Function *# */
 				
 				/* #* [S] Event Binding *# */
@@ -190,29 +221,27 @@
 				/* #* [E] Event Binding *# */
 				
 				/* #* [S] Business Logics *# */
-	            if ( _bInit ) {
-		            var setIntervalRankData = setInterval(function(){
-		            	var sHtmlTags = "";
-		            	var nHeight = 0;
-		            	
-			            // 실시간급상승 검색어 데이터 조회
-		            	Controller.setAction("/findRealRankList", "", "", false);
-						Controller.setParams({});
-						Controller.submit(function(data){
-							jQuery("#divTargetNaverRank").empty();
-							jQuery("#divTargetDaumRank").empty();
-							
-							for ( var i=0; i < data.naver.length; i++ ) {
-								fnAppendRank(data.naver[i], i, jQuery("#divTargetNaverRank"));
-								fnAppendRank(data.daum[i], i, jQuery("#divTargetDaumRank"));
-							}
-						});
-		            }, 10000);
-	            }
-	            var rFinanceList = [];
-	            
-	            #foreach( $eachData in $!{rFinanceList} )
-	            	rFinanceList.push({
+	            //var setIntervalRankData = setInterval(function(){
+	            	var sHtmlTags = "";
+	            	var nHeight = 0;
+	            	
+		            // 실시간급상승 검색어 데이터 조회
+	            	Controller.setAction("/findRealRankList");
+					Controller.setParams({});
+					Controller.submit(function(data){
+						jQuery("#divTargetNaverRank").empty();
+						jQuery("#divTargetDaumRank").empty();
+						
+						for ( var i=0; i < data.naver.length; i++ ) {
+							fnAppendRank(data.naver[i], i, jQuery("#divTargetNaverRank"));
+							fnAppendRank(data.daum[i], i, jQuery("#divTargetDaumRank"));
+						}
+					});
+	            //}, 10000);
+				
+	            var lsFinanceList = [];
+	            #foreach( $eachData in $!{lsFinanceList} )
+	            	lsFinanceList.push({
 	            		Section	: '$!{eachData.section}', 
 	            		Amount	: '$!{eachData.amount}',
 						Point	: '$!{eachData.point}',
@@ -222,7 +251,7 @@
 	            
 				jQuery("#grid_finance").shieldGrid({
 					dataSource	: {
-						data : rFinanceList
+						data : lsFinanceList
 					},
 					sorting	: {
 						multiple: true
@@ -231,29 +260,11 @@
 					paging		: false,
 					columns		: [
 						{ field: "Section", title: "Section" },
-						{ field: "Amount",	title: "Amount" },                
-						{ field: "Point",	title: "Point" },
-						{ field: "Percent",	title: "Percent" }
+						{ field: "Amount",	title: "시세" },                
+						{ field: "Point",	title: "포인트" },
+						{ field: "Percent",	title: "등락률" }
 					]
 				});
-	            
-	            jQuery("#grid_finance2").shieldGrid({
-					dataSource	: {
-						data : rFinanceList
-					},
-					sorting	: {
-						multiple: true
-					},
-					rowHover	: false,
-					paging		: false,
-					columns		: [
-						{ field: "Section", title: "Section" },
-						{ field: "Amount",	title: "Amount" },                
-						{ field: "Point",	title: "Point" },
-						{ field: "Percent",	title: "Percent" }
-					]
-				});
-	            
 	            
 	            jQuery("#grid_trendrank_sh").shieldGrid({
 					dataSource	: {
@@ -265,10 +276,10 @@
 					rowHover	: true,
 					paging		: false,
 					columns		: [
-						{ field: "nm",	title: "Index" },
-						{ field: "nv",	title: "Amount",	format: "{0:n:0}" },
-						{ field: "cv",	title: "Variation", format: "{0:n:0}" },
-						{ field: "cr",	title: "Percent",	format: "{0} %" }
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
 	            
@@ -282,10 +293,10 @@
 					rowHover	: true,
 					paging		: false,
 					columns		: [
-						{ field: "nm",	title: "Index" },
-						{ field: "nv",	title: "Amount",	format: "{0:n:0}" },
-						{ field: "cv",	title: "Variation", format: "{0:n:0}" },
-						{ field: "cr",	title: "Percent",	format: "{0} %" }
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
 	            
@@ -299,10 +310,10 @@
 					rowHover	: true,
 					paging		: false,
 					columns		: [
-						{ field: "nm",	title: "Index" },
-						{ field: "nv",	title: "Amount",	format: "{0:n:0}" },
-						{ field: "cv",	title: "Variation", format: "{0:n:0}" },
-						{ field: "cr",	title: "Percent",	format: "{0} %" }
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
 	            
@@ -316,16 +327,105 @@
 					rowHover	: true,
 					paging		: false,
 					columns		: [
-						{ field: "nm",	title: "Index" },
-						{ field: "nv",	title: "Amount",	format: "{0:n:0}" },
-						{ field: "cv",	title: "Variation", format: "{0:n:0}" },
-						{ field: "cr",	title: "Percent",	format: "{0} %" }
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
 	            
-	            _bInit = true;
+	            jQuery("#grid_trendrank_bg").shieldGrid({
+					dataSource	: {
+						data : $!{lsTrendRankList}[4].result.list
+					},
+					sorting	: {
+						multiple: true
+					},
+					rowHover	: true,
+					paging		: false,
+					columns		: [
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
+					]
+				});
 	            
-	            /* #* [E] Business Logics *# */    
+	            jQuery("#grid_trendrank_cf").shieldGrid({
+					dataSource	: {
+						data : $!{lsTrendRankList}[5].result.list
+					},
+					sorting	: {
+						multiple: true
+					},
+					rowHover	: true,
+					paging		: false,
+					columns		: [
+						{ field: "nm",	title: "종목" },
+						{ field: "nv",	title: "시세",	format: "{0:n:0}" },
+						{ field: "cv",	title: "전일비",	format: "{0:n:0}" },
+						{ field: "cr",	title: "등락률",	format: "{0} %" }
+					]
+				});
+	            
+	            var lsKospiUpperList = [];
+	            #foreach( $eachData in $!{lsKospiUpperList} )
+	            	lsKospiUpperList.push({
+	            		Section		: '$!{eachData.section}', 
+	            		Amount		: '$!{eachData.amount}',
+	            		Diffpercent	: '$!{eachData.diffpercent}',
+	            		Percent		: '$!{eachData.percent}',
+	            		Volume		: '$!{eachData.volume}'
+	            	});
+	            #end
+	            
+	            var lsKosdaqUpperList = [];
+	            #foreach( $eachData in $!{lsKosdaqUpperList} )
+	            	lsKosdaqUpperList.push({
+	            		Section		: '$!{eachData.section}', 
+	            		Amount		: '$!{eachData.amount}',
+	            		Diffpercent	: '$!{eachData.diffpercent}',
+	            		Percent		: '$!{eachData.percent}',
+	            		Volume		: '$!{eachData.volume}'
+	            	});
+	            #end
+	            
+	            jQuery("#grid_kospi_upper").shieldGrid({
+					dataSource	: {
+						data : lsKospiUpperList
+					},
+					sorting	: {
+						multiple: true
+					},
+					rowHover	: true,
+					paging		: false,
+					columns		: [
+						{ field: "Section",		title: "종목"		},
+						{ field: "Amount",		title: "시세"		},
+						{ field: "Diffpercent",	title: "전일비"	},
+						{ field: "Percent",		title: "등락률"	},
+						{ field: "Volume",		title: "거래량"	} 
+					]
+				});
+	            
+	            jQuery("#grid_kosdaq_upper").shieldGrid({
+					dataSource	: {
+						data : lsKosdaqUpperList
+					},
+					sorting	: {
+						multiple: true
+					},
+					rowHover	: true,
+					paging		: false,
+					columns		: [
+						{ field: "Section",		title: "종목"		},
+						{ field: "Amount",		title: "시세"		},
+						{ field: "Diffpercent",	title: "전일비"	},
+						{ field: "Percent",		title: "등락률"	},
+						{ field: "Volume",		title: "거래량"	} 
+					]
+				});
+	            /* #* [E] Business Logics *# */
 			/* #* [E] Document Ready *# */
 			});
 			
@@ -338,11 +438,6 @@
 					target.append(sHtmlTags);
 				}, 80 * i);
 			}
-			
-			lsTrendRankList = $!{lsTrendRankList};
-			var nLength = lsTrendRankList.length;
-			
-			
 		}(jQuery));
 	</script>
 </body>
