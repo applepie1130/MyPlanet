@@ -170,6 +170,14 @@
 		</dependency>
 		<!-- [E] spring-jdbc -->
 		
+		<!-- [S] apache-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- [E] apache-dbcp -->
+		
 		<!-- [S] Transaction -->
 		<dependency>
 			<groupId>org.springframework</groupId>
