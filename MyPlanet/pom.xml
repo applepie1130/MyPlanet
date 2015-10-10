@@ -310,6 +310,14 @@
 			<version>4.5</version>
 		</dependency>
 		<!-- [E] Http Client Configure -->
+		
+		<!-- [S] Joda-Time Configure -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<!-- [E] Joda-Time Configure -->
 	</dependencies>
     <build>
     	<!-- [S] Include file in WAR Configure -->

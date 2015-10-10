@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.ObjectUtils;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.myplanet.comm.CommonService;
 
-@Service
+@Service("mainSvc")
 @Transactional
 public class MainService extends CommonService {
 	

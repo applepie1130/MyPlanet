@@ -1,5 +1,7 @@
 package com.myplanet.comm;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.joda.time.DateTime;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.mobile.device.site.SitePreferenceUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -55,7 +58,14 @@ public class HandlerInterceptorAdapter extends SuperDelegationAdapter implements
 		mCookieInfo.put("cookieName", "MY_FAVORITE");
 		mRtnCookieInfo = RequestUtil.getCookie(mCookieInfo, request, response);
 		GLIO.setFavoriteCookieInfo(ObjectUtils.toString(mRtnCookieInfo.get("MY_FAVORITE")));
-
+		
+		// 현재시간구하기
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
+		String formattedDate = dateFormat.format(date);
+		StringBuffer sb = new StringBuffer();
+		sb.append("현재 시간은 ").append(formattedDate);
+		
 		System.out.println("");
 		System.out.println("==============PRE HANDLE==================");
 		System.out.println("Referer\t\t: " + sReferer);
@@ -64,7 +74,8 @@ public class HandlerInterceptorAdapter extends SuperDelegationAdapter implements
 		System.out.println("isMobile ?\t: " + GLIO.getUserAgentMobileYn());
 		System.out.println("Client IP ?\t: " + GLIO.getUserIp());
 		System.out.println("Favorite ?\t: " + GLIO.getFavoriteCookieInfo());
-		System.out.println("Instance Info \t" + GLIO);
+		System.out.println("Instance Info \t:" + GLIO);
+		System.out.println("Current Time \t:" + sb);
 		System.out.println("==============PRE HANDLE==================");
 		System.out.println("");
 		

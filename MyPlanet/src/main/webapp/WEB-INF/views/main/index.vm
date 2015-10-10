@@ -125,7 +125,7 @@
                                 <a data-toggle="tab" href="#financeDebate">토론</a>
                             </li>
                             <li class="">
-                                <a data-toggle="tab" href="#financeBloge">블로그</a>
+                                <a data-toggle="tab" href="#financeBlog">블로그</a>
                             </li>
                             <li class="">
                                 <a data-toggle="tab" href="#financeCafe">카페</a>
@@ -221,7 +221,7 @@
 				/* #* [E] Event Binding *# */
 				
 				/* #* [S] Business Logics *# */
-	            //var setIntervalRankData = setInterval(function(){
+	            var setIntervalRankData = setInterval(function(){
 	            	var sHtmlTags = "";
 	            	var nHeight = 0;
 	            	
@@ -237,7 +237,7 @@
 							fnAppendRank(data.daum[i], i, jQuery("#divTargetDaumRank"));
 						}
 					});
-	            //}, 10000);
+	            }, 10000);
 				
 	            var lsFinanceList = [];
 	            #foreach( $eachData in $!{lsFinanceList} )

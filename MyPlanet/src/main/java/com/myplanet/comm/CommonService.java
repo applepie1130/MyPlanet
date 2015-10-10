@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class CommonService extends SuperDelegationAdapter {
 	
-	@Autowired
+//	@Autowired
 	private SqlSession session;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonService.class);

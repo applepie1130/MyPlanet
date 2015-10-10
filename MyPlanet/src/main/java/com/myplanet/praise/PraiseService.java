@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myplanet.comm.CommonService;
 
-@Service
+@Service("praiseSvc")
 @Transactional
 public class PraiseService extends CommonService {
 	

@@ -33,7 +33,7 @@ import com.myplanet.comm.BusinessException;
 import com.myplanet.comm.CommonService;
 import com.myplanet.comm.StringUtil;
 
-@Service
+@Service("testSvc")
 @Transactional
 public class TestService extends CommonService {
 	
