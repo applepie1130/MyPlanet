@@ -7,12 +7,12 @@
 		<!-- #*	[S] Common Snb *# -->
 		#parse( "/common/snb.vm" )
 		<!-- #*	[E] Common Snb *# -->
-		
+
 		<!-- #*	[S] Container *# -->
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2>SungJun's Blog</h2>
+					<h2>News</h2>
 					<div class="alert alert-dismissable alert-warning">
 						<button data-dismiss="alert" class="close" type="button">&times;</button>
 						<b>오늘의 말씀 ($!{mRtnDailyQTData.searchTime.substring(0,10)})</b>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
             	<div class="col-md-6">
                 	<h4 class="tab-header">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6">
 					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 실시간 급상승 검색어</h4>
                    <header>
@@ -104,7 +104,7 @@
 					</div>
 				</div>
             </div>
-            
+
             <div class="row">
             	<div class="col-md-6">
 					<h4 class="tab-header">
@@ -153,7 +153,7 @@
 						</div>
 					</div>
 				</div>
-                
+
                 <!-- <div class="col-md-4">
 					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 이시각 증시</h4>
 					<div id="grid_finance"></div>
@@ -186,10 +186,10 @@
         </div>
 		<!-- #*	[E] Container *# -->
 	</div>
-	
+
 	<script type="text/javascript">
 		"use strict";
-		
+
 		/* #* Velocity 주석 in Javascript *# */
 		(function(jQuery) {
 			/* #* [S] Document Ready *# */
@@ -197,58 +197,58 @@
 				/* #* [S] Init Function *# */
 				/* #* [E] Init Function *# */
 
-				
+
 				/* #* [S] Pre Excute Function *# */
 				var nHeigthOfNaver = jQuery("#naverRank").height() + 5;
 				jQuery("#naverRank").height(nHeigthOfNaver);
 				jQuery("#daumRank").height(nHeigthOfNaver-10);
-				
+
 				/* #* Remove DEMO VERSION *# */
 				var st = setTimeout(function() {
 					jQuery('a[href="http://www.shieldui.com"]').remove();
 				}, 100);
-				
+
 				/* var el = jQuery(".tab-content");
 				el.html(el.html().replace(/Demo Version/ig, "")); */
-				/* #* Remove DEMO VERSION *# */				
-				
+				/* #* Remove DEMO VERSION *# */
+
 				/* #* [E] Pre Excute Function *# */
-				
+
 				/* #* [S] Event Binding *# */
 				jQuery(".nav-tabs li").mouseover(function(e){
   					jQuery(e.target).click();
 				});
 				/* #* [E] Event Binding *# */
-				
+
 				/* #* [S] Business Logics *# */
 	            var setIntervalRankData = setInterval(function(){
 	            	var sHtmlTags = "";
 	            	var nHeight = 0;
-	            	
+
 		            // 실시간급상승 검색어 데이터 조회
 	            	Controller.setAction("/findRealRankList");
 					Controller.setParams({});
 					Controller.submit(function(data){
 						jQuery("#divTargetNaverRank").empty();
 						jQuery("#divTargetDaumRank").empty();
-						
+
 						for ( var i=0; i < data.naver.length; i++ ) {
 							fnAppendRank(data.naver[i], i, jQuery("#divTargetNaverRank"));
 							fnAppendRank(data.daum[i], i, jQuery("#divTargetDaumRank"));
 						}
 					});
 	            }, 10000);
-				
+
 	            var lsFinanceList = [];
 	            #foreach( $eachData in $!{lsFinanceList} )
 	            	lsFinanceList.push({
-	            		Section	: '$!{eachData.section}', 
+	            		Section	: '$!{eachData.section}',
 	            		Amount	: '$!{eachData.amount}',
 						Point	: '$!{eachData.point}',
 	            		Percent	: '$eachData.rate'
 	            	});
 	            #end
-	            
+
 				jQuery("#grid_finance").shieldGrid({
 					dataSource	: {
 						data : lsFinanceList
@@ -260,12 +260,12 @@
 					paging		: false,
 					columns		: [
 						{ field: "Section", title: "Section" },
-						{ field: "Amount",	title: "시세" },                
+						{ field: "Amount",	title: "시세" },
 						{ field: "Point",	title: "포인트" },
 						{ field: "Percent",	title: "등락률" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_sh").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[0].result.list
@@ -282,7 +282,7 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_nw").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[1].result.list
@@ -299,7 +299,7 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_cp").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[2].result.list
@@ -316,7 +316,7 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_db").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[3].result.list
@@ -333,7 +333,7 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_bg").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[4].result.list
@@ -350,7 +350,7 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            jQuery("#grid_trendrank_cf").shieldGrid({
 					dataSource	: {
 						data : $!{lsTrendRankList}[5].result.list
@@ -367,29 +367,29 @@
 						{ field: "cr",	title: "등락률",	format: "{0} %" }
 					]
 				});
-	            
+
 	            var lsKospiUpperList = [];
 	            #foreach( $eachData in $!{lsKospiUpperList} )
 	            	lsKospiUpperList.push({
-	            		Section		: '$!{eachData.section}', 
+	            		Section		: '$!{eachData.section}',
 	            		Amount		: '$!{eachData.amount}',
 	            		Diffpercent	: '$!{eachData.diffpercent}',
 	            		Percent		: '$!{eachData.percent}',
 	            		Volume		: '$!{eachData.volume}'
 	            	});
 	            #end
-	            
+
 	            var lsKosdaqUpperList = [];
 	            #foreach( $eachData in $!{lsKosdaqUpperList} )
 	            	lsKosdaqUpperList.push({
-	            		Section		: '$!{eachData.section}', 
+	            		Section		: '$!{eachData.section}',
 	            		Amount		: '$!{eachData.amount}',
 	            		Diffpercent	: '$!{eachData.diffpercent}',
 	            		Percent		: '$!{eachData.percent}',
 	            		Volume		: '$!{eachData.volume}'
 	            	});
 	            #end
-	            
+
 	            jQuery("#grid_kospi_upper").shieldGrid({
 					dataSource	: {
 						data : lsKospiUpperList
@@ -404,10 +404,10 @@
 						{ field: "Amount",		title: "시세"		},
 						{ field: "Diffpercent",	title: "전일비"	},
 						{ field: "Percent",		title: "등락률"	},
-						{ field: "Volume",		title: "거래량"	} 
+						{ field: "Volume",		title: "거래량"	}
 					]
 				});
-	            
+
 	            jQuery("#grid_kosdaq_upper").shieldGrid({
 					dataSource	: {
 						data : lsKosdaqUpperList
@@ -422,13 +422,13 @@
 						{ field: "Amount",		title: "시세"		},
 						{ field: "Diffpercent",	title: "전일비"	},
 						{ field: "Percent",		title: "등락률"	},
-						{ field: "Volume",		title: "거래량"	} 
+						{ field: "Volume",		title: "거래량"	}
 					]
 				});
 	            /* #* [E] Business Logics *# */
 			/* #* [E] Document Ready *# */
 			});
-			
+
 			function fnAppendRank ( data, i, target ) {
 				var sHtmlTags = '<h5 class="tab-header">' +
 								'	<span class="badge" style="float:left; position: absolute;">' + data.rank + '</span>' +

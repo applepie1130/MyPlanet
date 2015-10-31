@@ -1,0 +1,126 @@
+<!-- #*	[S] Common Header *# -->
+#parse( "/common/header.vm" )
+<!-- #*	[E] Common Header *# -->
+
+<body>
+	<div id="wrapper">
+		<!-- #*	[S] Common Snb *# -->
+		#parse( "/common/snb.vm" )
+		<!-- #*	[E] Common Snb *# -->
+
+		<!-- #*	[S] Container *# -->
+
+		<div class="page-header">
+			<div class="input-group" style="width: 96%; margin: 0 auto;">
+				<input class="form-control input-lg" id="searchArea" title="검색어 입력" placeholder="" type="text">
+				<span class="input-group-btn">
+					<button class="btn btn-lg btn-warning" id="btn_Search" type="button" style="padding:14px 20px"> <i class="fa fa-search"></i> </button>
+				</span>
+			</div>
+		</div>
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 검색 결과</h4>
+					<header>
+                       <ul class="nav nav-tabs">
+                           <li class="active">
+                               <a data-toggle="tab" href="#naverSearch">NAVER</a>
+                           </li>
+                           <li class="">
+                               <a data-toggle="tab" href="#daumSearch">Daum</a>
+                           </li>
+                       </ul>
+                   </header>
+                   <div class="body tab-content">
+                       <div class="tab-pane clearfix active" id="naverSearch">
+                       	<br/>
+                       	<div id="naver" style="width:100%;">
+							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+						</div>
+                       </div>
+                       <div class="tab-pane" id="daumSearch">
+                       	<br/>
+	                       	<div id="daum" style="width:100%;">
+								<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+		<!-- #*	[E] Container *# -->
+	</div>
+
+	<script type="text/javascript">
+		"use strict";
+
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				/* #* [S] Init Function *# */
+				/* #* [E] Init Function *# */
+
+
+				/* #* [S] Pre Excute Function *# */
+
+				/* #* Remove DEMO VERSION *# */
+				var st = setTimeout(function() {
+					jQuery('a[href="http://www.shieldui.com"]').remove();
+				}, 100);
+				/* #* Remove DEMO VERSION *# */
+
+				/* #* [E] Pre Excute Function *# */
+
+				/* #* [S] Event Binding *# */
+				jQuery(".nav-tabs li").mouseover(function(e){
+  					jQuery(e.target).click();
+				});
+
+				jQuery("#btn_Search").click(function(){
+					var sQuery = jQuery("#searchArea").val();
+					search(sQuery);
+				});
+
+				jQuery("#searchArea").keypress(function(e) {
+				    if (e.keyCode == 13) {
+				    	jQuery("#btn_Search").trigger("click");
+				    }
+				});
+				/* #* [E] Event Binding *# */
+
+				/* #* [S] Business Logics *# */
+	            /* #* [E] Business Logics *# */
+			/* #* [E] Document Ready *# */
+			});
+
+			function search( sQuery ) {
+				Controller.setAction("/search/findSearchData");
+				Controller.setParams({
+					url			: "http://search.naver.com/search.naver?ie=UTF-8&query=",
+					qry			: encodeURIComponent(sQuery),
+					selector	: "#main_pack",
+					engine		: "naver"
+				});
+				Controller.submit(function(data){
+					jQuery("#naver").html(data.htmlData);
+				});
+
+				Controller.setAction("/search/findSearchData");
+				Controller.setParams({
+					url			: "http://search.daum.net/nate?thr=sbma&w=tot&q=",
+					qry			: encodeURIComponent(sQuery),
+					selector	: "#mArticle",
+					engine		: "daum"
+				});
+				Controller.submit(function(data){
+					jQuery("#daum").html(data.htmlData);
+				});
+			}
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Common Footer *# -->
+#parse( "/common/footer.vm" )
+<!-- #*	[E] Common Footer *# -->
