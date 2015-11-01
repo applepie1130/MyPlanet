@@ -12,16 +12,16 @@
 
 		<div class="page-header">
 			<div class="input-group" style="width: 96%; margin: 0 auto;">
-				<input class="form-control input-lg" id="searchArea" title="검색어 입력" placeholder="" type="text">
+				<input class="form-control" id="searchArea" title="검색어 입력" placeholder="" type="text">
 				<span class="input-group-btn">
-					<button class="btn btn-lg btn-warning" id="btn_Search" type="button" style="padding:14px 20px"> <i class="fa fa-search"></i> </button>
+					<button class="btn btn-default btn-primary" id="btn_Search" type="button" style="padding:7px 18px;"><i class="fa fa-search"></i></button>
 				</span>
 			</div>
 		</div>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 검색 결과</h4>
+					<h4 class="tab-header"><i class="fa fa-chevron-right"></i> 통합 검색</h4>
 					<header>
                        <ul class="nav nav-tabs">
                            <li class="active">
@@ -36,13 +36,19 @@
                        <div class="tab-pane clearfix active" id="naverSearch">
                        	<br/>
                        	<div id="naver" style="width:100%;">
-							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+							<div class="text-center v-center">
+								<br/><br/><br/><br/><br/><br/>
+								<p class="lead">NAVER</p>
+                    		</div>
 						</div>
                        </div>
                        <div class="tab-pane" id="daumSearch">
                        	<br/>
 	                       	<div id="daum" style="width:100%;">
-								<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+								<div class="text-center v-center">
+									<br/><br/><br/><br/><br/><br/>
+									<p class="lead">Daum</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -64,6 +70,11 @@
 
 
 				/* #* [S] Pre Excute Function *# */
+
+				/* #* Init Height Size *# */
+				var nBrowserHeight = jQuery(window).height();
+				jQuery("#naver, #daum").height(nBrowserHeight-300);
+				/* #* Init Height Size *# */
 
 				/* #* Remove DEMO VERSION *# */
 				var st = setTimeout(function() {
@@ -104,6 +115,7 @@
 					engine		: "naver"
 				});
 				Controller.submit(function(data){
+					jQuery("#naver").css("height", "");
 					jQuery("#naver").html(data.htmlData);
 				});
 
@@ -115,6 +127,7 @@
 					engine		: "daum"
 				});
 				Controller.submit(function(data){
+					jQuery("#daum").css("height", "");
 					jQuery("#daum").html(data.htmlData);
 				});
 			}

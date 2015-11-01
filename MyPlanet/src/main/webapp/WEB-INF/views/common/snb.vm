@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul id="active" class="nav navbar-nav side-nav">
                     <li class="selected"><a href="/"><i class="fa fa-newspaper-o"></i> News</a></li>
-                    <li><a href="/search"><i class="fa fa-search"></i> Search</a></li>
+                    <li ><a href="/search"><i class="fa fa-search"></i> Search</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
                     <li class="dropdown messages-dropdown">
