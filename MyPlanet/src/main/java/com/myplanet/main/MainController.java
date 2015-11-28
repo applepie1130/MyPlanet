@@ -26,7 +26,6 @@ import com.myplanet.comm.RequestUtil;
  */
 @Controller
 public class MainController extends CommonController {
-
 	/*
 	 * Define Service Variables
 	 */
@@ -36,7 +35,7 @@ public class MainController extends CommonController {
 	@Autowired (required=false)
 	private FileService fileSvc;
 
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * @Desc	: 메인페이지
@@ -47,7 +46,7 @@ public class MainController extends CommonController {
 	@RequestMapping("/")
 	public String findMainPage(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request, HttpServletResponse response) {
 		paramMap = RequestUtil.getParameter(paramMap, request, response);
-
+		
 		// 랭킹순위제한
 		paramMap.put("ranknum", 10);
 
@@ -104,6 +103,9 @@ public class MainController extends CommonController {
 		model.addAttribute("lsTrendRankList", lsTrendRankList);
 		model.addAttribute("lsKospiUpperList", lsKospiUpperList);
 		model.addAttribute("lsKosdaqUpperList", lsKosdaqUpperList);
+		
+		List findTestList = mainSvc.findTestList(paramMap);
+		logger.info("쿼리정보 : {}", findTestList);
 
 		return "/main/main";
 	}

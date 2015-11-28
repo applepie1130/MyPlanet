@@ -13,15 +13,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.myplanet.comm.CommonService;
+import com.myplanet.test.TestService;
 
 @Service("mainSvc")
 @Transactional
 public class MainService extends CommonService {
+	
+	@Autowired
+	TestService testSvc;
 	
 	/**
 	 * @Desc	: 실시간 급상승 데이터 조회 (네이버)
@@ -357,4 +362,15 @@ public class MainService extends CommonService {
 		
 		return lsRtnData;
 	}
+	
+	/**
+	 * @Desc	: 조회 테스트
+	 * @Author	: 김성준
+	 * @Create	: 2015년 11월 28일 
+	 * @stereotype ServiceMethod
+	 */
+	public List findTestList(Map paramMap) {
+		List resultData = queryForListData("mainQry.selectTestList", paramMap);
+		return resultData;
+	}	
 }

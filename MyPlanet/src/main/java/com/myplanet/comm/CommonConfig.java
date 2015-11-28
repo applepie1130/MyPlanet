@@ -1,30 +1,27 @@
 package com.myplanet.comm;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@PropertySource("/WEB-INF/spring/common.properties")
+//@Configuration
+//@PropertySource("/WEB-INF/spring/common.properties")
+@Component
 public class CommonConfig {
-	@Value("${service.shutDownStartDt}")
+	@Value("#{commonConf['service.shutDownStartDt']}")
 	private String serviceShutDownStartDt;
-	@Value("${service.shutDownEndDt}")
+	@Value("#{commonConf['service.shutDownEndDt']}")
 	private String serviceShutDownEndDt;
-	@Value("${server.ip}")
+	@Value("#{commonConf['server.ip']}")
 	private String serverIp;
-	@Value("${server.port}")
+	@Value("#{commonConf['server.port']}")
 	private String serverPort;
-	@Value("${server.domain}")
+	@Value("#{commonConf['server.domain']}")
 	private String serverDomain;
 	
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+//		return new PropertySourcesPlaceholderConfigurer();
+//	}
 	
 	/**
 	 * @return the serviceShutDownStartDt

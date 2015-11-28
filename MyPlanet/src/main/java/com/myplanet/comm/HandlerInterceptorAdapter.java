@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ObjectUtils;
-import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.mobile.device.site.SitePreferenceUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 public class HandlerInterceptorAdapter extends SuperDelegationAdapter implements HandlerInterceptor {
+	
+	private final Logger logger = LoggerFactory.getLogger(HandlerInterceptorAdapter.class);
 	
 	/**
 	 * @Desc	: 전처리기
@@ -66,18 +69,16 @@ public class HandlerInterceptorAdapter extends SuperDelegationAdapter implements
 		StringBuffer sb = new StringBuffer();
 		sb.append("현재 시간은 ").append(formattedDate);
 		
-		System.out.println("");
-		System.out.println("==============PRE HANDLE==================");
-		System.out.println("Referer\t\t: " + sReferer);
-		System.out.println("LoginSession\t: " + mRtnCookieInfo.get("SNS_SESSION"));
-		System.out.println("Login ?\t\t: " + GLIO.getSnsLoginStatus());
-		System.out.println("isMobile ?\t: " + GLIO.getUserAgentMobileYn());
-		System.out.println("Client IP ?\t: " + GLIO.getUserIp());
-		System.out.println("Favorite ?\t: " + GLIO.getFavoriteCookieInfo());
-		System.out.println("Instance Info \t:" + GLIO);
-		System.out.println("Current Time \t:" + sb);
-		System.out.println("==============PRE HANDLE==================");
-		System.out.println("");
+		logger.info("==============PRE HANDLE==================");
+		logger.info("Referer\t\t: {}", sReferer);
+		logger.info("LoginSession\t: {}", mRtnCookieInfo.get("SNS_SESSION"));
+		logger.info("Login ?\t\t: {}", GLIO.getSnsLoginStatus());
+		logger.info("isMobile ?\t: {}", GLIO.getUserAgentMobileYn());
+		logger.info("Client IP ?\t: {}", GLIO.getUserIp());
+		logger.info("Favorite ?\t: {}", GLIO.getFavoriteCookieInfo());
+		logger.info("Instance Info \t:{}", GLIO);
+		logger.info("Current Time \t:{}", sb);
+		logger.info("==============PRE HANDLE==================");
 		
 		return true;
 	}

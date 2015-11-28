@@ -24,6 +24,12 @@
 		 order by a.user_sq desc
     </select>
     
+    <select id ="selectTestList" parameterType="java.util.Map" resultType= "java.util.Map">
+    	select 'test'
+    	  from dual
+    	 where 1 = 1 
+    </select>
+    
     <!-- insertUserInfo -->
     <insert id ="insertUserInfo" parameterType="java.util.Map">
     	insert into myapp.user_info (

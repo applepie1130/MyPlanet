@@ -256,4 +256,16 @@ public class TestService extends CommonService {
 		
 		return mRtnData;
 	}
+	
+	/**
+	 * @Desc	: 테스트 조회
+	 * @Author	: 김성준
+	 * @Create	: 2015년 11월 28일 
+	 * @stereotype ServiceMethod
+	 */
+	@CacheEvict(value="default", allEntries=true)
+	public List findTestList(Map paramMap) {
+		List resultData = queryForListData("userQry.selectTestList", paramMap);
+		return resultData;
+	}
 }

@@ -24,6 +24,7 @@
 	
 	<!-- [S] Configurer config -->
 	<context:property-placeholder location="/WEB-INF/spring/common.properties" />
+    <util:properties id="commonConf" location="/WEB-INF/spring/common.properties" />
     <!-- [E] Configurer config -->
 	
 	<!-- [S] SQL DataSource config -->
