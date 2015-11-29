@@ -3,15 +3,15 @@ package com.myplanet.comm;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 public class StringUtil {
-	public static String toCamelCase(String value ) {
+    public static String toCamelCase(String value ) {
         String[] strings = StringUtils.split(value.toLowerCase(), "_");
         for (int i = 1; i < strings.length; i++){
             strings[i] = StringUtils.capitalize(strings[i]);
         }
-//        return StringUtils.join(strings);
-        return "";
+        return StringUtils.join(strings);
     }
     
     public static String getUniqueString() { 

@@ -104,8 +104,11 @@ public class MainController extends CommonController {
 		model.addAttribute("lsKospiUpperList", lsKospiUpperList);
 		model.addAttribute("lsKosdaqUpperList", lsKosdaqUpperList);
 		
+		// [S] 쿼리 조회 테스트
 		List findTestList = mainSvc.findTestList(paramMap);
+//		User user = (User) findTestList.get(0);
 		logger.info("쿼리정보 : {}", findTestList);
+		// [E] 쿼리 조회 테스트
 
 		return "/main/main";
 	}

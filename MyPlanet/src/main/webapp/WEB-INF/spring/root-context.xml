@@ -27,20 +27,26 @@
     <util:properties id="commonConf" location="/WEB-INF/spring/common.properties" />
     <!-- [E] Configurer config -->
 	
+	
 	<!-- [S] SQL DataSource config -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
-        <!-- <property name="driverClass" value="${jdbc.driverClassName}"></property>-->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+  	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+    <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"> -->
+        <!-- <property name="driverClass" value="${jdbc.driverClassName}"></property> -->
         <property name="driverClassName" value="${jdbc.driverClassName}"></property>
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
       <property name="password" value="${jdbc.password}" />
     </bean>
+    <bean id="lazyDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<constructor-arg ref="dataSource" />
+	</bean>
     <!-- [E] SQL DataSource config -->
     
 	<!-- [S] SQL SessionFactory Config -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <!-- <property name="dataSource" ref="dataSource"></property> -->
+        <property name="dataSource" ref="lazyDataSource" />
         <property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml"></property>
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -50,9 +56,11 @@
     
     <!-- [S] Transaction config -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
+		<!-- <property name="dataSource" ref="dataSource"/> -->
+		<property name="dataSource" ref="lazyDataSource" />
 	</bean>
     <!-- [E] Transaction config -->
+
     
     <!-- [S] RestTemplate -->
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
