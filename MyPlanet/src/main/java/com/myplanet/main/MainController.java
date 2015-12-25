@@ -53,43 +53,42 @@ public class MainController extends CommonController {
 		Map mRtnData	= new HashMap<String, Object>();
 
 		// 네이버
-		paramMap.put("url", "http://www.naver.com/");
+		paramMap.put("filePath", "/tank0/batch/NaverRealRankList.json");
 		List lsNaverRankList = mainSvc.findNaverRealRankList(paramMap);
 
 		// 다음
-		paramMap.put("url", "http://www.daum.net/");
+		paramMap.put("filePath", "/tank0/batch/DaumRealRankList.json");
 		List lsDaumRankList = mainSvc.findDaumRealRankList(paramMap);
 
 		// 갓피플 오늘의 말씀
-		paramMap.put("url", "http://www.godpeople.com/ajax/_home_top100.php");
-//		paramMap.put("url", "http://www.duranno.com/qt/reload_default.asp");
+		paramMap.put("filePath", "/tank0/batch/DailyQTMap.json");
 		Map mRtnDailyQTData = mainSvc.findDailyQTData(paramMap);
 
 		// 네이트 랭킹뉴스(시사)
-		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=m2001&section=sisa&rmode=interest");
+		paramMap.put("filePath", "/tank0/batch/NateRealRankNewsList_1.json");
 		List lsSisaRankList = mainSvc.findNateRealRankList(paramMap);
 
 		// 네이트 랭킹뉴스(연예)
-		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=e2001&section=ent&rmode=interest");
+		paramMap.put("filePath", "/tank0/batch/NateRealRankNewsList_2.json");
 		List lsEntRankList = mainSvc.findNateRealRankList(paramMap);
 
 		// 네이트 랭킹뉴스(스포츠)
-		paramMap.put("url", "http://m.news.nate.com/rank/list?mid=s2001&section=spo&rmode=interest");
+		paramMap.put("filePath", "/tank0/batch/NateRealRankNewsList_3.json");
 		List lsSpoRankList = mainSvc.findNateRealRankList(paramMap);
 
 		// 네이버 증권정보
-		paramMap.put("url", "http://m.stock.naver.com/");
+		paramMap.put("filePath", "/tank0/batch/NaverFinanceList.json");
 		List lsFinanceList = mainSvc.findNaverFinanceList(paramMap);
-
+		
 		// 네이버 트렌드 랭킹
-		List lsTrendRankList = mainSvc.findNaverTrendRankJSONList();
+		paramMap.put("filePath", "/tank0/batch/NaverTrendRankList.json");
+		List lsTrendRankList = mainSvc.findNaverTrendRankJSONList(paramMap);
 
 		// 네이버 증권정보(상한가 종목)
-		paramMap.put("url", "http://finance.naver.com/sise/sise_upper.nhn");
-		paramMap.put("type", "KOSPI");
+		paramMap.put("filePath", "/tank0/batch/NaverFinanceUpperList_KOSPI.json");
 		List lsKospiUpperList = mainSvc.findNaverFinanceUpperList(paramMap);
 
-		paramMap.put("type", "KOSDAQ");
+		paramMap.put("filePath", "/tank0/batch/NaverFinanceUpperList_KOSDAQ.json");
 		List lsKosdaqUpperList = mainSvc.findNaverFinanceUpperList(paramMap);
 
 		// set response data
@@ -105,9 +104,9 @@ public class MainController extends CommonController {
 		model.addAttribute("lsKosdaqUpperList", lsKosdaqUpperList);
 		
 		// [S] 쿼리 조회 테스트
-		List findTestList = mainSvc.findTestList(paramMap);
+//		List findTestList = mainSvc.findTestList(paramMap);
 //		User user = (User) findTestList.get(0);
-		logger.info("쿼리정보 : {}", findTestList);
+//		logger.info("쿼리정보 : {}", findTestList);
 		// [E] 쿼리 조회 테스트
 
 		return "/main/main";
@@ -127,11 +126,11 @@ public class MainController extends CommonController {
 		Map mRtnData = new HashMap<String, List>();
 
 		// 네이버
-		paramMap.put("url", "http://www.naver.com/");
+		paramMap.put("filePath", "/tank0/batch/NaverRealRankList.json");
 		mRtnData.put("naver", mainSvc.findNaverRealRankList(paramMap));
 
 		// 다음카카오
-		paramMap.put("url", "http://www.daum.net/");
+		paramMap.put("filePath", "/tank0/batch/DaumRealRankList.json");
 		mRtnData.put("daum", mainSvc.findDaumRealRankList(paramMap));
 
 		return mRtnData;
