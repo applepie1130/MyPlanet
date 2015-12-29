@@ -90,7 +90,11 @@ public class MainController extends CommonController {
 
 		paramMap.put("filePath", "/tank0/batch/NaverFinanceUpperList_KOSDAQ.json");
 		List lsKosdaqUpperList = mainSvc.findNaverFinanceUpperList(paramMap);
-
+		
+		// 선택 SNB 메뉴 셋팅
+		Map<String, String> mSnbMenuInfo = new HashMap<String, String>();
+		mSnbMenuInfo.put("menu1", "selected");
+		
 		// set response data
 		model.addAttribute("lsNaverRankList", lsNaverRankList);
 		model.addAttribute("lsDaumRankList", lsDaumRankList);
@@ -102,6 +106,7 @@ public class MainController extends CommonController {
 		model.addAttribute("lsTrendRankList", lsTrendRankList);
 		model.addAttribute("lsKospiUpperList", lsKospiUpperList);
 		model.addAttribute("lsKosdaqUpperList", lsKosdaqUpperList);
+		model.addAttribute("mSnbMenuInfo", mSnbMenuInfo);
 		
 		// [S] 쿼리 조회 테스트
 //		List findTestList = mainSvc.findTestList(paramMap);

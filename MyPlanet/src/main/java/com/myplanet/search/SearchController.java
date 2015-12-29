@@ -43,6 +43,12 @@ public class SearchController extends CommonController {
 	@RequestMapping("/search")
 	public String findMainPage(@RequestParam Map<String, Object> paramMap, Model model, HttpServletRequest request, HttpServletResponse response) {
 		paramMap = RequestUtil.getParameter(paramMap, request, response);
+		
+		// 선택 SNB 메뉴 셋팅
+		Map<String, String> mSnbMenuInfo = new HashMap<String, String>();
+		mSnbMenuInfo.put("menu2", "selected");
+		
+		model.addAttribute("mSnbMenuInfo", mSnbMenuInfo);
 
 		return "/search/search";
 	}
