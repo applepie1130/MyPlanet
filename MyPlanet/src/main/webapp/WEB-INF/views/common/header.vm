@@ -4,20 +4,21 @@
 	<meta charset="utf-8">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
+
 	<title>SungJun's Blog</title>
-	
+
+	<link rel="shortcut icon" type="image/x-icon" href="resources/lib/images/favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="/resources/lib/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/lib/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/resources/lib/css/local.css" />
-	
+
 	<script type="text/javascript" src="/resources/lib/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/spin.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/typeahead.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/common.min.js"></script>
-	
+
 	<!-- #*	[S] CDN CSS, JS *# -->
 	<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/shieldui-all.min.css" />
     <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
@@ -26,6 +27,6 @@
     <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
     <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
 	<!-- #*	[E] CDN CSS, JS *# -->
-	
+
 </head>
 #parse( "/common/spinner.vm" )

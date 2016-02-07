@@ -16,6 +16,9 @@
                     <li class="$!{mSnbMenuInfo.menu2}">
                     	<a href="/search"><i class="fa fa-search"></i> Search</a>
 					</li>
+					<li class="$!{mSnbMenuInfo.menu3}">
+                    	<a href="/codegen"><i class="fa fa-terminal"></i> CodeGen</a>
+					</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
                     <li class="dropdown messages-dropdown">
