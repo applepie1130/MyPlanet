@@ -9,6 +9,8 @@
 	<script type="text/javascript" src="/resources/lib/js/codemirror_sql.js"></script>
 </head>
 
+
+
 <body>
 	<div id="wrapper">
 		<!-- #*	[S] Common Snb *# -->
@@ -170,8 +172,13 @@
 						outputDelete.output
 					);
 				});
-
 				/* #* [E] Event Binding *# */
+
+				/* #* [S] Trigger Event *# */
+				// for Example
+  				queryEditor.setValue("apple_pie1130\nkim_sung_jun\nhello_world");
+  				jQuery("#navCamel").trigger("click");
+  				/* #* [E] Trigger Event *# */
 
 				/* #* [S] Business Logics *# */
 				function getTableName() {
