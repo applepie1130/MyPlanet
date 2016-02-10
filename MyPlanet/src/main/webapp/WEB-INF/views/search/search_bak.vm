@@ -59,7 +59,79 @@
 	</div>
 
 	<script type="text/javascript">
-		"use strict";(function(d){d(function(){var b=d(window).height();d("#naver, #daum").height(b-300);var c=setTimeout(function(){d('a[href="http://www.shieldui.com"]').remove()},100);d(".nav-tabs li").mouseover(function(e){d(e.target).click()});d("#btn_Search").click(function(){var a=d("#searchArea").val();search(a)});d("#searchArea").keypress(function(e){if(e.keyCode==13){d("#btn_Search").trigger("click")}})});function search(b){Controller.setAction("/search/findSearchData");Controller.setParams({url:"http://search.naver.com/search.naver?ie=UTF-8&query=",qry:encodeURIComponent(b),selector:"#main_pack",engine:"naver"});Controller.submit(function(a){d("#naver").css("height","");d("#naver").html(a.htmlData)});Controller.setAction("/search/findSearchData");Controller.setParams({url:"http://search.daum.net/nate?thr=sbma&w=tot&q=",qry:encodeURIComponent(b),selector:"#mArticle",engine:"daum"});Controller.submit(function(a){d("#daum").css("height","");d("#daum").html(a.htmlData)})}}(jQuery));
+		"use strict";
+
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				/* #* [S] Init Function *# */
+				/* #* [E] Init Function *# */
+
+
+				/* #* [S] Pre Excute Function *# */
+
+				/* #* Init Height Size *# */
+				var nBrowserHeight = jQuery(window).height();
+				jQuery("#naver, #daum").height(nBrowserHeight-300);
+				/* #* Init Height Size *# */
+
+				/* #* Remove DEMO VERSION *# */
+				var st = setTimeout(function() {
+					jQuery('a[href="http://www.shieldui.com"]').remove();
+				}, 100);
+				/* #* Remove DEMO VERSION *# */
+
+				/* #* [E] Pre Excute Function *# */
+
+				/* #* [S] Event Binding *# */
+				jQuery(".nav-tabs li").mouseover(function(e){
+  					jQuery(e.target).click();
+				});
+
+				jQuery("#btn_Search").click(function(){
+					var sQuery = jQuery("#searchArea").val();
+					search(sQuery);
+				});
+
+				jQuery("#searchArea").keypress(function(e) {
+				    if (e.keyCode == 13) {
+				    	jQuery("#btn_Search").trigger("click");
+				    }
+				});
+				/* #* [E] Event Binding *# */
+
+				/* #* [S] Business Logics *# */
+	            /* #* [E] Business Logics *# */
+			/* #* [E] Document Ready *# */
+			});
+
+			function search( sQuery ) {
+				Controller.setAction("/search/findSearchData");
+				Controller.setParams({
+					url			: "http://search.naver.com/search.naver?ie=UTF-8&query=",
+					qry			: encodeURIComponent(sQuery),
+					selector	: "#main_pack",
+					engine		: "naver"
+				});
+				Controller.submit(function(data){
+					jQuery("#naver").css("height", "");
+					jQuery("#naver").html(data.htmlData);
+				});
+
+				Controller.setAction("/search/findSearchData");
+				Controller.setParams({
+					url			: "http://search.daum.net/nate?thr=sbma&w=tot&q=",
+					qry			: encodeURIComponent(sQuery),
+					selector	: "#mArticle",
+					engine		: "daum"
+				});
+				Controller.submit(function(data){
+					jQuery("#daum").css("height", "");
+					jQuery("#daum").html(data.htmlData);
+				});
+			}
+		}(jQuery));
 	</script>
 </body>
 <!-- #*	[S] Common Footer *# -->

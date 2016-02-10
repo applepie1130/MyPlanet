@@ -1,0 +1,368 @@
+<!-- #*	[S] Common Header *# -->
+#parse( "/common/header.vm" )
+<!-- #*	[E] Common Header *# -->
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/resources/lib/css/codemirror.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/lib/css/mbo.css" />
+	<script type="text/javascript" src="/resources/lib/js/codemirror.js"></script>
+	<script type="text/javascript" src="/resources/lib/js/codemirror_sql.js"></script>
+</head>
+
+
+
+<body>
+	<div id="wrapper">
+		<!-- #*	[S] Common Snb *# -->
+		#parse( "/common/snb.vm" )
+		<!-- #*	[E] Common Snb *# -->
+
+		<!-- #*	[S] Container *# -->
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Code Generator</h2>
+                </div>
+            </div>
+
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="bs-example bs-navbar-top-example" data-example-id="navbar-fixed-to-top">
+						<nav class="navbar navbar-default">
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<a class="navbar-brand" href="#"><i class="fa fa-chevron-right"></i> Paste Fields</a>
+								</div>
+							</div>
+						</nav>
+					</div>
+					<textarea id="queryEditor" name="queryEditor" style="display: none;"></textarea>
+				</div>
+                <div class="col-lg-6">
+	                <div class="bs-example bs-navbar-top-example" data-example-id="navbar-fixed-to-top">
+							<nav class="navbar navbar-default">
+								<div class="container-fluid">
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
+											<span class="sr-only">Toggle navigation</span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+										</button>
+										<a class="navbar-brand" href="#"><i class="fa fa-chevron-right"></i> Copy Fields</a>
+									</div>
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+										<ul class="nav navbar-nav">
+											<li><a href="#" id="navCamel">CamelCase</a></li>
+											<li><a href="#" id="navVO">VO</a></li>
+											<li><a href="#" id="navResultMap">ResultMap</a></li>
+											<li><a href="#" id="navSQL">SQL</a></li>
+										</ul>
+									</div>
+								</div>
+							</nav>
+						</div>
+						<textarea id="queryViewer" name="queryViewer" style="display: none;"></textarea>
+				</div>
+			</div>
+        </div>
+		<!-- #*	[E] Container *# -->
+	</div>
+
+	<script type="text/javascript">
+		"use strict";
+
+		/* #* Velocity 주석 in Javascript *# */
+		(function(jQuery) {
+			/* #* [S] Document Ready *# */
+			jQuery(function() {
+				/* #* [S] Init Function *# */
+				var mime = "text/x-plsql";
+  				// get mime type
+  				if (window.location.href.indexOf("mime=") > -1) {
+    				mime = window.location.href.substr(window.location.href.indexOf("mime=") + 5);
+  				}
+
+  				var configuration = {
+					mode		: mime,
+					lineNumbers	: true,
+					extraKeys	: {"Ctrl-Space": "autocomplete"},
+					dragDrop	: true,
+					theme		: "mbo",
+					styleActiveLine	: true,
+				    matchBrackets	: true,
+				    indentWithTabs	: true,
+				    smartIndent		: true,
+				    autofocus		: true,
+				    hintOptions: {tables: {
+				      users: {name: null, score: null, birthDate: null},
+				      countries: {name: null, population: null, size: null}
+				    }}
+  				};
+
+  				// Code Editor
+				var queryEditor = CodeMirror.fromTextArea(jQuery("#queryEditor").get(0), configuration);
+
+  				// Code Viewer
+				configuration.autofocus=false;
+				configuration.readOnly=true;
+				var queryViewer = CodeMirror.fromTextArea(jQuery("#queryViewer").get(0), configuration);
+
+				// Editor, Viewer Show
+
+				/* #* [E] Init Function *# */
+
+				/* #* [S] Pre Excute Function *# */
+
+				/* #* Remove DEMO VERSION *# */
+				var st = setTimeout(function() {
+					jQuery("a[href='http://www.shieldui.com']").remove();
+				}, 100);
+				/* #* Remove DEMO VERSION *# */
+
+				/* #* [E] Pre Excute Function *# */
+
+				/* #* [S] Event Binding *# */
+				jQuery(".nav-tabs li").mouseover(function(e){
+  					jQuery(e.target).click();
+				});
+
+				jQuery("#navCamel").bind("click", function(e){
+					e.preventDefault();
+
+					var convertData	= convert("camelcase");
+					var outputData	= applyConvertedCode(convertData.convertType, convertData.output1, convertData.output2);
+					queryViewer.setValue(outputData.output);
+				});
+
+				jQuery("#navVO").bind("click", function(e){
+					e.preventDefault();
+
+					var convertData	= convert("vo");
+					var outputData	= applyConvertedCode(convertData.convertType, convertData.output1, convertData.output2);
+					queryViewer.setValue(outputData.output);
+				});
+
+				jQuery("#navResultMap").bind("click", function(e){
+					e.preventDefault();
+
+					var convertData	= convert("resultMap");
+					var outputData	= applyConvertedCode(convertData.convertType, convertData.output1, convertData.output2);
+					queryViewer.setValue(outputData.output);
+
+				});
+
+				jQuery("#navSQL").bind("click", function(e){
+					e.preventDefault();
+
+					var convertSelect	= convert("select");
+					var outputSelect	= applyConvertedCode(convertSelect.convertType, convertSelect.output1, convertSelect.output2);
+
+					var convertInsert	= convert("insert");
+					var outputInsert	= applyConvertedCode(convertInsert.convertType, convertInsert.output1, convertInsert.output2);
+
+					var convertUpdate	= convert("update");
+					var outputUpdate	= applyConvertedCode(convertUpdate.convertType, convertUpdate.output1, convertUpdate.output2);
+
+					var convertDelete	= convert("delete");
+					var outputDelete	= applyConvertedCode(convertDelete.convertType, convertDelete.output1, convertDelete.output2);
+
+					queryViewer.setValue(
+						outputSelect.output + "\n\n\n" +
+						outputInsert.output + "\n\n\n" +
+						outputUpdate.output + "\n\n\n" +
+						outputDelete.output
+					);
+				});
+				/* #* [E] Event Binding *# */
+
+				/* #* [S] Trigger Event *# */
+				// for Example
+  				queryEditor.setValue("apple_pie1130\nkim_sung_jun\nhello_world");
+  				jQuery("#navCamel").trigger("click");
+  				/* #* [E] Trigger Event *# */
+
+				/* #* [S] Business Logics *# */
+				function getTableName() {
+					return "{DATABASE.TABLE} ";
+				}
+
+				function convert( convertType ) {
+			        var input = queryEditor.getValue();
+
+			        // 유효검사
+			        input = input.trim();
+			       	input = input.replace(" ", "\n");
+
+			        var count = 0;
+			        var output1 = "";
+			        var output2 = "";
+
+			        var lines = input.split(/\n/);
+			        for (var i = 0, max_i = lines.length; i < max_i; i++) {
+			            var before = lines[i];
+			            before = jQuery.trim(before.toUpperCase());
+
+			            // skip empty lines
+			            if(before === "") {
+			                continue;
+			            }
+
+			            // conversion
+			            var after = before.toLowerCase().replace(/_(\w)/g, function(word) {
+			                return word.toUpperCase();
+			            });
+			            after = after.replace(/_/g, "");
+
+			            // make result for each
+			            switch ( convertType ) {
+							case "camelcase":		// Camelcase
+								output1 += (after + "\n");
+							break;
+
+							case "vo":				// Value Object
+								var modifier = "private";
+				                var datatype = "String";
+
+			                    output1 += (modifier + " " + datatype + " " + after + ";\n");
+							break;
+
+							case "resultMap":		// ResultMap
+								output1 += ('\t<result property="' + after + '" column="' + before.toUpperCase() + '" />\n');
+							break;
+
+							case "select":
+								// Select Query
+								if(count == 0) {
+				                    output1 += (before) + "\t\t\t AS " + (before);
+				                }
+				                else {
+				                    output1 += ("\n\t," + before) + "\t\t\t AS " + (before);;
+				                }
+
+				                if(count == 0) {
+				                    output2 += (before + " = #{" + after + "}\n");
+				                }
+				                else {
+				                    output2 += ("\tAND " + before + " = #{" + after + "}\n");
+				                }
+							break;
+
+							case "insert":			// Insert
+								if(count == 0) {
+				                    output1 += (before);
+				                }
+				                else {
+				                    output1 += ("\n\t, " + before);
+				                }
+
+				                if(count == 0) {
+				                    output2 += ("#{" + after + "}");
+				                }
+				                else {
+				                    output2 += ("\n\t, #{" + after + "}");
+				                }
+							break;
+
+							case "update":			// Update
+								if(count == 0) {
+				                    output1 += (before + " = #{" + after + "}");
+				                }
+				                else {
+				                    output1 += (",\n\t" + before + " = #{" + after + "}");
+				                }
+
+				                if(count == 0) {
+				                    output2 += (before + " = #{" + after + "}\n");
+				                }
+				                else {
+				                    output2 += ("\tAND " + before + " = #{" + after + "}\n");
+				                }
+							break;
+
+							case "delete":			// Delete
+								if(count == 0) {
+				                    output1 += (before + " = #{" + after + "}\n");
+				                }
+				                else {
+				                    output1 += ("\tAND " + before + " = #{" + after + "}\n");
+				                }
+							break;
+
+							default:
+								output1 += (after + "\n");
+							break;
+						}
+
+			            count++;
+			        }
+
+			        return {
+			        	"convertType"	: convertType,
+			        	"output1"		: output1,
+			        	"output2"		: output2
+			        }
+			    }
+
+				function applyConvertedCode (convertType, output1, output2) {
+					var output = "";
+			        switch ( convertType ) {
+						case "camelcase":		// Camelcase
+							output = output1;
+						break;
+
+						case "vo":				// Value Object
+							output = output1;
+						break;
+
+						case "resultMap":		// ResultMap
+							output = '<resultMap id="" class="">\n';
+				            output += output1;
+				            output += '</resultMap>';
+						break;
+
+						case "select":			// Select
+							output = "SELECT ";
+				            output += output1 + "\n";
+				            output += "FROM " + getTableName() + " \n";
+				            output += "WHERE ";
+				            output += output2 + ";";
+						break;
+
+						case "insert":			// Insert
+							output = "INSERT INTO " + getTableName() + "\n\t(" + output1 + ") \n";
+				            output += "VALUES ( \n\t" + output2 + ")\n;";
+						break;
+
+						case "update":			// Update
+							output = "UPDATE " + getTableName() + " \n";
+				            output += "SET " + output1 + "\n";
+				            output += "WHERE ";
+				            output += output2 + ";";
+						break;
+
+						case "delete":			// Delete
+							output = "DELETE FROM " + getTableName() + " \n";
+				            output += "WHERE ";
+				            output += output1 + ";";
+						break;
+
+						default:
+						break;
+					}
+
+			        return {
+			        	"output" : output
+			        }
+				}
+
+
+	            /* #* [E] Business Logics *# */
+			/* #* [E] Document Ready *# */
+			});
+		}(jQuery));
+	</script>
+</body>
+<!-- #*	[S] Common Footer *# -->
+#parse( "/common/footer.vm" )
+<!-- #*	[E] Common Footer *# -->
